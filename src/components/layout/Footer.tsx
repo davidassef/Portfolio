@@ -22,9 +22,28 @@ export default function Footer({ locale }: FooterProps) {
                             <span className="text-[var(--text-muted)]">.dev</span>
                         </span>
                         <p className="text-sm text-[var(--text-muted)]">
-                            © {currentYear} {personalInfo.name}.{' '}
+                            © {currentYear} Assef Digital. {locale === 'en' ? 'Operated by' : 'Operado por'} David Assef Carneiro.{' '}
                             {locale === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'}
                         </p>
+                        <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
+                            <a
+                                href="https://www.recibofast.com.br"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[var(--accent-cyan)] transition-colors"
+                            >
+                                Privacy Policy
+                            </a>
+                            <span>|</span>
+                            <a
+                                href="https://www.recibofast.com.br"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-[var(--accent-cyan)] transition-colors"
+                            >
+                                Terms of Use
+                            </a>
+                        </div>
                     </div>
 
                     {/* Social Links - Maiores */}

@@ -72,7 +72,7 @@ export const personalInfo: PersonalInfo = {
         en: "Full-Stack Developer & AI Engineer",
         ptBR: "Desenvolvedor Full-Stack & Engenheiro de IA"
     },
-    email: "davidassef@email.com", // TODO: Atualizar com email real
+    email: "davidassef@gmail.com",
     github: "https://github.com/davidassef",
     linkedin: "https://linkedin.com/in/davidassef", // TODO: Atualizar
     whatsapp: "+5585996642441",
@@ -188,10 +188,11 @@ export const projects: Project[] = [
             ptBR: "Solução completa de gerenciamento de recibos para aluguéis e outras receitas. Inclui autenticação de usuários, gerenciamento de banco de dados e máxima proteção de dados com criptografia."
         },
         technologies: ["TypeScript", "React", "Next.js", "PostgreSQL", "Go"],
+        liveUrl: "https://www.recibofast.com.br",
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'staging'
+        status: 'production'
     },
     {
         id: "jinglemagico",
@@ -201,10 +202,11 @@ export const projects: Project[] = [
             ptBR: "Gerador de jingles com IA que cria conteúdo de áudio personalizado usando tecnologia avançada de geração de música. Permite que usuários criem áudio único para seus projetos."
         },
         technologies: ["TypeScript", "React", "AI/ML", "Audio API"],
+        liveUrl: "https://www.jinglemagico.com.br",
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'staging'
+        status: 'production'
     },
     {
         id: "lotoscore",
