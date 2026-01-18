@@ -577,9 +577,10 @@ body {
 }
 
 /* Print Overrides: Ajustes finos para garantir que o PDF fique bonito */
+/* Print Overrides: Ajustes finos para otimizar espaço no papel */
 @media print {
   @page {
-    margin: 0.5cm;
+    margin: 1cm;
     size: A4;
   }
 
@@ -587,6 +588,8 @@ body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background: white;
+    font-size: 13px;
+    /* Redução leve para caber mais */
   }
 
   .cv-page {
@@ -597,30 +600,64 @@ body {
   .cv-container {
     box-shadow: none;
     max-width: 100%;
-    padding: 0 16px;
-    /* Pequeno padding lateral para segurança */
+    padding: 0;
     margin: 0;
     width: 100%;
   }
 
-  /* Força a exibição de bordas e fundos suaves nos cards mesmo na impressão */
-  .cv-project,
-  .cv-skill-category,
-  .cv-experience {
-    border: 1px solid #e5e7eb !important;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    box-shadow: none;
+  /* Compactar margens verticais */
+  .cv-header {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom-width: 2px;
   }
 
-  /* Mantém o grid de 2 colunas se couber, ou ajusta para 1 se for melhor pro papel */
-  /* Geralmente em A4 2 colunas funcionam bem para skills e projetos curtos */
+  .cv-section {
+    margin-bottom: 16px;
+    /* Bem menor */
+    break-inside: auto;
+    /* IMPORTANTE: Permite quebrar a seção */
+  }
+
+  .cv-section h2 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    break-after: avoid;
+    /* Tenta grudar título no próximo elemento */
+  }
+
+  /* Cards */
+  .cv-experience,
+  .cv-project,
+  .cv-skill-category {
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none;
+    padding: 10px 14px;
+    /* Padding reduzido */
+    margin-bottom: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Experiências longas podem quebrar se necessário */
+  .cv-experience {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  /* Grid compacto */
   .cv-skills-grid,
   .cv-projects {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
-    row-gap: 20px;
+    gap: 12px;
+  }
+
+  .cv-exp-desc,
+  .cv-project>p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
   }
 
   .no-print {
