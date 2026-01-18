@@ -168,7 +168,7 @@ export async function generateCV({ locale }: GenerateCVOptions): Promise<void> {
     pdf.text(locale === 'en' ? 'FEATURED PROJECTS' : 'PROJETOS EM DESTAQUE', margin, yPos);
     yPos += 6;
 
-    const featuredProjects = projects.filter(p => p.featured).slice(0, 4);
+    const featuredProjects = projects.filter(p => p.featured);
 
     featuredProjects.forEach((project) => {
         const description = locale === 'en' ? project.description.en : project.description.ptBR;
@@ -211,8 +211,8 @@ export async function generateCV({ locale }: GenerateCVOptions): Promise<void> {
     pdf.setFontSize(8);
     pdf.setTextColor(...mutedColor);
     const footerText = locale === 'en'
-        ? 'Generated from davidassef.dev'
-        : 'Gerado em davidassef.dev';
+        ? 'Generated from davidassef.me'
+        : 'Gerado em davidassef.me';
     pdf.text(footerText, pageWidth / 2, pageHeight - 10, { align: 'center' });
 
     // Download

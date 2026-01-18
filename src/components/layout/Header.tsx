@@ -8,7 +8,6 @@ import { personalInfo } from '@/lib/data';
 interface HeaderProps {
     locale: string;
     onLocaleChange: (locale: string) => void;
-    onDownloadCV: () => void;
 }
 
 const navItems = [
@@ -19,7 +18,7 @@ const navItems = [
     { id: 'contact', labelEn: 'Contact', labelPt: 'Contato' },
 ];
 
-export default function Header({ locale, onLocaleChange, onDownloadCV }: HeaderProps) {
+export default function Header({ locale, onLocaleChange }: HeaderProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -42,8 +41,8 @@ export default function Header({ locale, onLocaleChange, onDownloadCV }: HeaderP
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-[var(--bg-primary)]/95 backdrop-blur-lg border-b border-[var(--border-subtle)] shadow-lg'
-                    : 'bg-transparent'
+                ? 'bg-[var(--bg-primary)]/95 backdrop-blur-lg border-b border-[var(--border-subtle)] shadow-lg'
+                : 'bg-transparent'
                 }`}
         >
             <div className="container flex items-center justify-between h-20">
@@ -82,10 +81,13 @@ export default function Header({ locale, onLocaleChange, onDownloadCV }: HeaderP
                     </button>
 
                     {/* Download CV Button */}
-                    <button onClick={onDownloadCV} className="btn-primary text-sm py-3 px-6">
+                    <Link
+                        href={`/cv?lang=${locale}`}
+                        className="btn-primary text-sm py-3 px-6"
+                    >
                         <Download size={18} />
                         <span>{locale === 'en' ? 'Download CV' : 'Baixar CV'}</span>
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -122,16 +124,14 @@ export default function Header({ locale, onLocaleChange, onDownloadCV }: HeaderP
                                 <Globe size={20} />
                                 <span>{locale === 'en' ? 'Português' : 'English'}</span>
                             </button>
-                            <button
-                                onClick={() => {
-                                    onDownloadCV();
-                                    setIsMobileMenuOpen(false);
-                                }}
+                            <Link
+                                href={`/cv?lang=${locale}`}
                                 className="btn-primary text-sm py-3 px-5"
+                                onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 <Download size={18} />
                                 <span>CV</span>
-                            </button>
+                            </Link>
                         </div>
                     </nav>
                 </div>

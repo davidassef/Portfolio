@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://davidassef.dev",
+    url: "https://davidassef.me",
     title: "David Assef | Full-Stack Developer & AI Engineer",
     description: "AI-driven developer building smart tools with ML, voice cloning & music generation.",
     siteName: "David Assef Portfolio",

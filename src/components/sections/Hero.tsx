@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ArrowDown } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowDown, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/lib/data';
 
@@ -151,6 +152,13 @@ export default function Hero({ locale }: HeroProps) {
                             <button onClick={scrollToContact} className="btn-secondary">
                                 {locale === 'en' ? 'Get in Touch' : 'Entre em Contato'}
                             </button>
+                            <Link
+                                href={`/cv?lang=${locale}`}
+                                className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--accent-cyan)] transition-colors"
+                            >
+                                <FileText size={16} />
+                                <span>{locale === 'en' ? 'Download CV' : 'Baixar CV'}</span>
+                            </Link>
                         </motion.div>
                     </div>
                 </div>
