@@ -578,9 +578,11 @@ body {
 
 /* Print Overrides: Ajustes finos para garantir que o PDF fique bonito */
 /* Print Overrides: Ajustes finos para otimizar espaço no papel */
+/* Print Overrides: Ajustes finos para otimizar espaço no papel - VERSÃO COMPACTA */
 @media print {
   @page {
-    margin: 1cm;
+    margin: 0.6cm;
+    /* Margem mínima para impressora doméstica */
     size: A4;
   }
 
@@ -588,8 +590,17 @@ body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background: white;
-    font-size: 13px;
-    /* Redução leve para caber mais */
+    font-size: 11px;
+    /* Fonte reduzida para caber muito conteúdo */
+  }
+
+  h1 {
+    font-size: 1.8rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .cv-title {
+    font-size: 1rem !important;
   }
 
   .cv-page {
@@ -607,57 +618,92 @@ body {
 
   /* Compactar margens verticais */
   .cv-header {
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom-width: 2px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom-width: 1px;
   }
 
   .cv-section {
-    margin-bottom: 16px;
-    /* Bem menor */
+    margin-bottom: 10px;
+    /* Margem mínima entre seções */
     break-inside: auto;
-    /* IMPORTANTE: Permite quebrar a seção */
+    page-break-inside: auto;
   }
 
   .cv-section h2 {
-    margin-bottom: 8px;
-    font-size: 1rem;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ddd;
     break-after: avoid;
-    /* Tenta grudar título no próximo elemento */
   }
 
   /* Cards */
   .cv-experience,
   .cv-project,
   .cv-skill-category {
-    border: 1px solid #e5e7eb !important;
+    border: 1px solid #eee !important;
     box-shadow: none;
-    padding: 10px 14px;
-    /* Padding reduzido */
+    padding: 6px 10px;
+    /* Padding minimalista */
     margin-bottom: 0;
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
-  /* Experiências longas podem quebrar se necessário */
+  /* Experiências */
   .cv-experience {
-    break-inside: auto;
-    page-break-inside: auto;
+    margin-bottom: 6px;
+    padding-left: 10px;
+    border-left: 2px solid #ccc !important;
+    /* Visual mais leve */
+  }
+
+  .cv-exp-header h3 {
+    font-size: 0.95rem !important;
+  }
+
+  .cv-company {
+    font-size: 0.85rem !important;
+  }
+
+  .cv-date {
+    font-size: 0.8rem !important;
+    padding: 2px 6px !important;
   }
 
   /* Grid compacto */
-  .cv-skills-grid,
+  .cv-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
   .cv-projects {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .cv-skill-category h3 {
+    font-size: 0.85rem !important;
+    margin-bottom: 4px !important;
+  }
+
+  .cv-skill-category p {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .cv-project-header h3 {
+    font-size: 0.9rem !important;
   }
 
   .cv-exp-desc,
   .cv-project>p {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 6px;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .no-print {

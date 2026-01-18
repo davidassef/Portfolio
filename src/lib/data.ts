@@ -216,6 +216,7 @@ export const projects: Project[] = [
             ptBR: "Plataforma de análise de loteria com análise estatística, rastreamento de frequência e reconhecimento de padrões para loterias brasileiras. Visualização avançada de dados."
         },
         technologies: ["TypeScript", "React", "Next.js", "PostgreSQL"],
+        liveUrl: "https://www.lotoscore.com.br",
         isPrivate: true,
         stars: 0,
         featured: true,
