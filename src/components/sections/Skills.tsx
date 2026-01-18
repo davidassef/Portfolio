@@ -75,7 +75,7 @@ export default function Skills({ locale }: SkillsProps) {
                     </p>
                 </motion.div>
 
-                <div className="space-y-20">
+                <div className="space-y-28">
                     {categories.map((category) => {
                         const categorySkills = skills.filter((s) => s.category === category);
                         const color = categoryColors[category];
@@ -87,6 +87,7 @@ export default function Skills({ locale }: SkillsProps) {
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
+                                className="pb-12 border-b border-[var(--border-subtle)] last:border-b-0 last:pb-0"
                             >
                                 <h3
                                     className="text-xl font-semibold mb-8 flex items-center gap-4"
