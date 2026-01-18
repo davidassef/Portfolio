@@ -1,0 +1,83 @@
+{
+    "header": {
+        "home": "Início",
+        "about": "Sobre",
+        "skills": "Habilidades",
+        "projects": "Projetos",
+        "experience": "Experiência",
+        "contact": "Contato",
+        "downloadCV": "Baixar CV"
+    },
+    "hero": {
+        "greeting": "Olá, sou",
+        "name": "David Assef",
+        "role": "Desenvolvedor Full-Stack & Engenheiro de IA",
+        "description": "Construindo soluções inteligentes com tecnologia de ponta. Código limpo, testes automatizados e desenvolvimento orientado por IA.",
+        "cta": {
+            "projects": "Ver Projetos",
+            "contact": "Entre em Contato"
+        }
+    },
+    "about": {
+        "title": "Sobre Mim",
+        "subtitle": "Transformando problemas complexos em soluções elegantes",
+        "description": "Sou um desenvolvedor de software apaixonado, focado em criar ferramentas inteligentes usando Machine Learning, clonagem de voz e geração de música. Acredito em princípios de código limpo, cobertura abrangente de testes e documentação detalhada. Enquanto a IA auxilia meu fluxo de trabalho, eu estou sempre no comando das decisões.",
+        "stats": {
+            "projects": "Projetos",
+            "technologies": "Tecnologias",
+            "yearsExp": "Anos Programando"
+        }
+    },
+    "skills": {
+        "title": "Stack Tecnológico",
+        "subtitle": "Tecnologias que uso diariamente",
+        "categories": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "ai": "IA & ML",
+            "tools": "Ferramentas & DevOps"
+        }
+    },
+    "projects": {
+        "title": "Projetos em Destaque",
+        "subtitle": "Uma seleção dos meus trabalhos recentes",
+        "viewCode": "Ver Código",
+        "liveDemo": "Demo ao Vivo",
+        "private": "Privado",
+        "filters": {
+            "all": "Todos",
+            "public": "Públicos",
+            "private": "Privados"
+        }
+    },
+    "experience": {
+        "title": "Experiência",
+        "subtitle": "Minha jornada profissional",
+        "present": "Presente"
+    },
+    "contact": {
+        "title": "Vamos Conectar",
+        "subtitle": "Tem um projeto em mente? Vamos torná-lo realidade.",
+        "email": "Me envie um email",
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "location": "Localização"
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados.",
+        "madeWith": "Feito com"
+    },
+    "cv": {
+        "generating": "Gerando CV...",
+        "download": "Baixar CV",
+        "sections": {
+            "about": "Sobre",
+            "experience": "Experiência",
+            "education": "Formação",
+            "skills": "Habilidades",
+            "projects": "Projetos",
+            "languages": "Idiomas",
+            "contact": "Contato"
+        }
+    }
+}

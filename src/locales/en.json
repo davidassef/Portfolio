@@ -1,0 +1,83 @@
+{
+    "header": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "projects": "Projects",
+        "experience": "Experience",
+        "contact": "Contact",
+        "downloadCV": "Download CV"
+    },
+    "hero": {
+        "greeting": "Hi, I'm",
+        "name": "David Assef",
+        "role": "Full-Stack Developer & AI Engineer",
+        "description": "Building intelligent solutions with cutting-edge technology. Clean code, automated tests, and AI-driven development.",
+        "cta": {
+            "projects": "View Projects",
+            "contact": "Get in Touch"
+        }
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "Turning complex problems into elegant solutions",
+        "description": "I'm a passionate software developer focused on creating intelligent tools using Machine Learning, voice cloning, and music generation. I believe in clean code principles, comprehensive test coverage, and detailed documentation. While AI assists my workflow, I'm always in the cockpit making the decisions.",
+        "stats": {
+            "projects": "Projects",
+            "technologies": "Technologies",
+            "yearsExp": "Years Coding"
+        }
+    },
+    "skills": {
+        "title": "Tech Stack",
+        "subtitle": "Technologies I work with daily",
+        "categories": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "ai": "AI & ML",
+            "tools": "Tools & DevOps"
+        }
+    },
+    "projects": {
+        "title": "Featured Projects",
+        "subtitle": "A selection of my recent work",
+        "viewCode": "View Code",
+        "liveDemo": "Live Demo",
+        "private": "Private",
+        "filters": {
+            "all": "All",
+            "public": "Public",
+            "private": "Private"
+        }
+    },
+    "experience": {
+        "title": "Experience",
+        "subtitle": "My professional journey",
+        "present": "Present"
+    },
+    "contact": {
+        "title": "Let's Connect",
+        "subtitle": "Got a project in mind? Let's make it happen.",
+        "email": "Email me",
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "location": "Location"
+    },
+    "footer": {
+        "rights": "All rights reserved.",
+        "madeWith": "Made with"
+    },
+    "cv": {
+        "generating": "Generating CV...",
+        "download": "Download CV",
+        "sections": {
+            "about": "About",
+            "experience": "Experience",
+            "education": "Education",
+            "skills": "Skills",
+            "projects": "Projects",
+            "languages": "Languages",
+            "contact": "Contact"
+        }
+    }
+}
