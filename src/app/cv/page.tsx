@@ -1,10 +1,11 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { personalInfo, skills, experiences, projects } from '@/lib/data';
 import { Download, Mail, Github, Linkedin, MapPin, Phone } from 'lucide-react';
 
-export default function CVPage() {
+function CVContent() {
     const searchParams = useSearchParams();
     const locale = searchParams.get('lang') === 'pt-BR' ? 'pt-BR' : 'en';
 
@@ -171,5 +172,13 @@ export default function CVPage() {
                 </footer>
             </div>
         </div>
+    );
+}
+
+export default function CVPage() {
+    return (
+        <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+            <CVContent />
+        </Suspense>
     );
 }
