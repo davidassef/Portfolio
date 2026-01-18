@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,6 +13,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Remover trailing slash para domínio customizado
+  trailingSlash: true,
 };
 
 export default nextConfig;
