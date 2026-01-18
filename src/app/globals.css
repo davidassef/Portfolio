@@ -957,55 +957,9 @@ body {
   font-size: 0.85rem;
 }
 
-.cv-footer {
-  margin-top: 32px;
-  padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #6b7280;
-}
 
-/* ============================================
-   PRINT STYLES
-   ============================================ */
 
-@media print {
-  .no-print {
-    display: none !important;
-  }
 
-  body {
-    background: white !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .cv-page {
-    min-height: auto;
-  }
-
-  .cv-container {
-    padding: 0;
-    max-width: 100%;
-  }
-
-  .cv-header {
-    page-break-after: avoid;
-  }
-
-  .cv-section {
-    page-break-inside: avoid;
-  }
-
-  a {
-    text-decoration: none !important;
-  }
-
-  .cv-contact a::after {
-    content: none !important;
-  }
-}
 
 /* Responsive CV */
 @media (max-width: 640px) {
