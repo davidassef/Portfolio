@@ -26,11 +26,29 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             );
         }
 
+        if (project.status === 'staging') {
+            return (
+                <span className="badge badge-yellow text-xs">
+                    <Rocket size={10} className="mr-1" />
+                    {locale === 'en' ? 'Staging' : 'Homologação'}
+                </span>
+            );
+        }
+
         if (project.status === 'development') {
             return (
                 <span className="badge badge-yellow text-xs">
                     <Code size={10} className="mr-1" />
                     {locale === 'en' ? 'In Dev' : 'Em Dev'}
+                </span>
+            );
+        }
+
+        if (project.status === 'challenge') {
+            return (
+                <span className="badge badge-purple text-xs">
+                    <Star size={10} className="mr-1" />
+                    {locale === 'en' ? 'Challenge' : 'Desafio'}
                 </span>
             );
         }
@@ -48,26 +66,26 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             className="glass-card overflow-hidden group flex flex-col h-full"
         >
             {/* Header */}
-            <div className="p-7 pb-5 flex-grow">
-                <div className="flex items-start justify-between gap-3 mb-4">
+            <div className="p-8 pb-6 flex-grow">
+                {/* Title + Badges Row */}
+                <div className="flex flex-col gap-3 mb-4">
                     <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors leading-tight">
                         {project.name}
                     </h3>
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 flex-wrap">
                         {project.stars > 0 && (
                             <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
                                 <Star size={12} className="fill-yellow-500 text-yellow-500" />
                                 {project.stars}
                             </span>
                         )}
-                        {project.isPrivate ? (
+                        {project.isPrivate && (
                             <span className="badge-purple text-xs flex items-center">
                                 <Lock size={10} className="mr-1" />
                                 {locale === 'en' ? 'Private' : 'Privado'}
                             </span>
-                        ) : (
-                            getStatusBadge()
                         )}
+                        {getStatusBadge()}
                     </div>
                 </div>
 
@@ -91,7 +109,7 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             </div>
 
             {/* Footer */}
-            <div className="px-7 py-5 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50 flex items-center gap-4">
+            <div className="px-8 py-5 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50 flex items-center gap-4">
                 {project.githubUrl ? (
                     <a
                         href={project.githubUrl}
@@ -188,15 +206,15 @@ export default function Projects({ locale }: ProjectsProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.2 }}
-                    className="flex justify-center gap-3 mb-14"
+                    className="flex justify-center gap-3 mb-20"
                 >
                     {filters.map((f) => (
                         <button
                             key={f.value}
                             onClick={() => setFilter(f.value)}
                             className={`px-6 py-3 rounded-full text-sm font-semibold transition-all ${filter === f.value
-                                    ? 'bg-[var(--accent-cyan)] text-[var(--bg-primary)] shadow-lg'
-                                    : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-card)]'
+                                ? 'bg-[var(--accent-cyan)] text-[var(--bg-primary)] shadow-lg'
+                                : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-card)]'
                                 }`}
                             style={filter === f.value ? { boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)' } : {}}
                         >
@@ -205,38 +223,41 @@ export default function Projects({ locale }: ProjectsProps) {
                     ))}
                 </motion.div>
 
-                {/* Projects Grid */}
-                <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
-                    <AnimatePresence mode="popLayout">
-                        {sortedProjects.map((project, index) => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                                locale={locale}
-                                index={index}
-                            />
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                {/* Projects Grid + CTA Container */}
+                <div className="flex flex-col gap-16">
+                    {/* Projects Grid */}
+                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-7 px-2">
+                        <AnimatePresence mode="popLayout">
+                            {sortedProjects.map((project, index) => (
+                                <ProjectCard
+                                    key={project.id}
+                                    project={project}
+                                    locale={locale}
+                                    index={index}
+                                />
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
 
-                {/* GitHub Link */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
-                    className="text-center mt-16"
-                >
-                    <a
-                        href="https://github.com/davidassef"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary inline-flex"
+                    {/* GitHub Link */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                        className="text-center"
                     >
-                        <Github size={20} />
-                        <span>{locale === 'en' ? 'View all on GitHub' : 'Ver todos no GitHub'}</span>
-                    </a>
-                </motion.div>
+                        <a
+                            href="https://github.com/davidassef"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary inline-flex"
+                        >
+                            <Github size={20} />
+                            <span>{locale === 'en' ? 'View all on GitHub' : 'Ver todos no GitHub'}</span>
+                        </a>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

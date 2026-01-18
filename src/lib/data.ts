@@ -12,7 +12,12 @@ export interface Project {
     isPrivate: boolean;
     stars: number;
     featured: boolean;
-    status?: 'production' | 'development' | 'discontinued';
+    status?: 'production' | 'staging' | 'development' | 'challenge' | 'discontinued';
+    versions?: {
+        name: string;
+        description: { en: string; ptBR: string };
+        technologies: string[];
+    }[];
 }
 
 export interface Skill {
@@ -93,6 +98,7 @@ export const projects: Project[] = [
         },
         technologies: ["HTML", "CSS", "JavaScript"],
         githubUrl: "https://github.com/davidassef/OMentalista",
+        liveUrl: "https://davidassef.github.io/OMentalista",
         isPrivate: false,
         stars: 0,
         featured: true,
@@ -116,15 +122,33 @@ export const projects: Project[] = [
         id: "schedule-shutdown",
         name: "Schedule Shutdown",
         description: {
-            en: "Windows automation tool for scheduling system shutdown/restart. User-friendly interface designed for non-technical users with timer presets.",
-            ptBR: "Ferramenta de automação Windows para agendar desligamento/reinicialização. Interface amigável projetada para usuários comuns com presets de timer."
+            en: "Windows automation tool for scheduling system shutdown/restart. Two versions available: v1 with Tkinter and v2 with modern PyQt6 interface.",
+            ptBR: "Ferramenta de automação Windows para agendar desligamento/reinicialização. Duas versões disponíveis: v1 com Tkinter e v2 com interface moderna PyQt6."
         },
-        technologies: ["Python", "Tkinter", "Windows API"],
+        technologies: ["Python", "Tkinter", "PyQt6", "Windows API"],
         githubUrl: "https://github.com/davidassef/schedule_shutdown",
         isPrivate: false,
         stars: 1,
         featured: true,
-        status: 'production'
+        status: 'production',
+        versions: [
+            {
+                name: "v1 - Classic",
+                description: {
+                    en: "Original version with simple Tkinter interface. Lightweight and portable.",
+                    ptBR: "Versão original com interface Tkinter simples. Leve e portátil."
+                },
+                technologies: ["Python", "Tkinter", "Windows API"]
+            },
+            {
+                name: "v2 - Modern",
+                description: {
+                    en: "Modern version with PyQt6 interface. Enhanced UI with themes, system tray, and scheduled tasks.",
+                    ptBR: "Versão moderna com interface PyQt6. UI aprimorada com temas, system tray e tarefas agendadas."
+                },
+                technologies: ["Python", "PyQt6", "Qt Designer", "Windows API"]
+            }
+        ]
     },
     {
         id: "amazon-search",
@@ -152,10 +176,10 @@ export const projects: Project[] = [
         isPrivate: false,
         stars: 0,
         featured: false,
-        status: 'production'
+        status: 'challenge'
     },
 
-    // PROJETOS PRIVADOS
+    // PROJETOS PRIVADOS (Em Homologação/Desenvolvimento)
     {
         id: "recibofast",
         name: "ReciboFast",
@@ -167,7 +191,7 @@ export const projects: Project[] = [
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'production'
+        status: 'staging'
     },
     {
         id: "jinglemagico",
@@ -180,7 +204,7 @@ export const projects: Project[] = [
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'production'
+        status: 'staging'
     },
     {
         id: "lotoscore",
@@ -193,7 +217,7 @@ export const projects: Project[] = [
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'development'
+        status: 'staging'
     },
     {
         id: "central-ia",
@@ -206,20 +230,7 @@ export const projects: Project[] = [
         isPrivate: true,
         stars: 0,
         featured: true,
-        status: 'development'
-    },
-    {
-        id: "deskorbit",
-        name: "DeskOrbit",
-        description: {
-            en: "Customer support ticketing system inspired by Chatwoot. Modern UI with efficient workflow management, real-time updates, and team collaboration.",
-            ptBR: "Sistema de tickets de suporte ao cliente inspirado no Chatwoot. UI moderna com gerenciamento eficiente de fluxo, atualizações em tempo real e colaboração em equipe."
-        },
-        technologies: ["Ruby", "Rails", "PostgreSQL", "Redis"],
-        isPrivate: true,
-        stars: 0,
-        featured: false,
-        status: 'development'
+        status: 'staging'
     }
 ];
 

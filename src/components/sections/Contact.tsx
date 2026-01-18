@@ -68,9 +68,9 @@ export default function Contact({ locale }: ContactProps) {
                 </motion.div>
 
                 {/* Container centralizado */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-16">
                     {/* Contact Cards - Grid centralizado com 5 itens */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 mb-28 w-full max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 w-full max-w-6xl mx-auto">
                         {contactLinks.map((link, index) => (
                             <motion.div
                                 key={link.label}

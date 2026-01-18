@@ -133,7 +133,7 @@ export default function Hero({ locale }: HeroProps) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="text-lg text-[var(--text-secondary)] mb-10 max-w-xl leading-relaxed"
+                            className="text-lg text-[var(--text-secondary)] mb-20 max-w-xl leading-relaxed"
                         >
                             {locale === 'en' ? personalInfo.bio.en : personalInfo.bio.ptBR}
                         </motion.p>

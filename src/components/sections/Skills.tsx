@@ -75,8 +75,8 @@ export default function Skills({ locale }: SkillsProps) {
                     </p>
                 </motion.div>
 
-                <div className="space-y-28">
-                    {categories.map((category) => {
+                <div className="flex flex-col gap-16">
+                    {categories.map((category, catIndex) => {
                         const categorySkills = skills.filter((s) => s.category === category);
                         const color = categoryColors[category];
 
@@ -87,10 +87,11 @@ export default function Skills({ locale }: SkillsProps) {
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
-                                className="pb-12 border-b border-[var(--border-subtle)] last:border-b-0 last:pb-0"
+                                className={catIndex < categories.length - 1 ? "pb-12 border-b border-[var(--border-subtle)]" : ""}
                             >
+                                {/* Título da categoria com mais espaço */}
                                 <h3
-                                    className="text-xl font-semibold mb-8 flex items-center gap-4"
+                                    className="text-xl font-semibold mb-10 flex items-center gap-4"
                                     style={{ color }}
                                 >
                                     <span
@@ -104,6 +105,8 @@ export default function Skills({ locale }: SkillsProps) {
                                         ? categoryLabels[category].en
                                         : categoryLabels[category].pt}
                                 </h3>
+
+                                {/* Grid de skills */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                                     {categorySkills.map((skill, idx) => (
                                         <SkillCard key={skill.name} skill={skill} index={idx} />

@@ -226,24 +226,35 @@ body {
   white-space: nowrap;
 }
 
+.badge.badge-purple,
 .badge-purple {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 9999px;
   background: rgba(139, 92, 246, 0.1);
   color: var(--accent-purple);
-  border-color: rgba(139, 92, 246, 0.25);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  white-space: nowrap;
 }
 
+.badge.badge-pink,
 .badge-pink {
   background: rgba(236, 72, 153, 0.1);
   color: var(--accent-pink);
   border-color: rgba(236, 72, 153, 0.25);
 }
 
+.badge.badge-green,
 .badge-green {
   background: rgba(16, 185, 129, 0.1);
   color: var(--accent-green);
   border-color: rgba(16, 185, 129, 0.25);
 }
 
+.badge.badge-yellow,
 .badge-yellow {
   background: rgba(234, 179, 8, 0.1);
   color: #eab308;
