@@ -50,16 +50,16 @@ export default function About({ locale }: AboutProps) {
                     </p>
                 </motion.div>
 
-                <div className="grid lg:grid-cols-5 gap-16 items-start">
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                     {/* Description - 3 colunas */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
-                        className="lg:col-span-3 space-y-7"
+                        className="lg:col-span-7 space-y-5"
                     >
-                        <p className="text-xl text-[var(--text-primary)] leading-relaxed font-light">
+                        <p className="text-lg text-[var(--text-primary)] leading-relaxed font-normal">
                             {locale === 'en' ? personalInfo.bio.en : personalInfo.bio.ptBR}
                         </p>
 
@@ -76,7 +76,7 @@ export default function About({ locale }: AboutProps) {
                         </p>
 
                         {/* Tags - Mais espaçamento */}
-                        <div className="flex flex-wrap gap-3 pt-6">
+                        <div className="flex flex-wrap gap-3">
                             {['Clean Code', 'SOLID', 'TDD', 'AI/ML', 'Open Source'].map((tag) => (
                                 <span key={tag} className="badge text-sm">
                                     {tag}
@@ -91,7 +91,7 @@ export default function About({ locale }: AboutProps) {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.3 }}
-                        className="lg:col-span-2 flex flex-col gap-6"
+                        className="lg:col-span-5 flex flex-col gap-4"
                     >
                         {statItems.map((stat, index) => (
                             <motion.div
@@ -100,11 +100,11 @@ export default function About({ locale }: AboutProps) {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                                className="glass-card p-8 text-center"
+                                className="glass-card text-center"
                             >
-                                <stat.icon className="w-10 h-10 mx-auto mb-5 text-[var(--accent-cyan)]" />
-                                <div className="text-4xl font-bold text-gradient mb-3">{stat.value}</div>
-                                <div className="text-base text-[var(--text-muted)]">
+                                <stat.icon className="w-10 h-10 mx-auto mb-3 text-[var(--accent-cyan)]" />
+                                <div className="text-3xl font-bold text-gradient mb-3">{stat.value}</div>
+                                <div className="text-sm text-[var(--text-muted)]">
                                     {locale === 'en' ? stat.labelEn : stat.labelPt}
                                 </div>
                             </motion.div>

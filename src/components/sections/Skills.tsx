@@ -32,9 +32,9 @@ function SkillCard({ skill, index }: { skill: Skill; index: number }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="glass-card p-5"
+            className="glass-card"
         >
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-5">
                 <span className="font-semibold text-[var(--text-primary)] text-base">{skill.name}</span>
                 <span className="text-sm text-[var(--text-muted)] font-medium">{skill.level}/5</span>
             </div>
@@ -75,7 +75,7 @@ export default function Skills({ locale }: SkillsProps) {
                     </p>
                 </motion.div>
 
-                <div className="flex flex-col gap-16">
+                <div className="flex flex-col gap-12">
                     {categories.map((category, catIndex) => {
                         const categorySkills = skills.filter((s) => s.category === category);
                         const color = categoryColors[category];
@@ -87,11 +87,11 @@ export default function Skills({ locale }: SkillsProps) {
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
-                                className={catIndex < categories.length - 1 ? "pb-12 border-b border-[var(--border-subtle)]" : ""}
+                                className={catIndex < categories.length - 1 ? "pb-8 border-b border-[var(--border-subtle)]" : ""}
                             >
                                 {/* Título da categoria com mais espaço */}
                                 <h3
-                                    className="text-xl font-semibold mb-10 flex items-center gap-4"
+                                    className="text-xl font-semibold mb-6 flex items-center gap-4"
                                     style={{ color }}
                                 >
                                     <span
@@ -107,7 +107,7 @@ export default function Skills({ locale }: SkillsProps) {
                                 </h3>
 
                                 {/* Grid de skills */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
                                     {categorySkills.map((skill, idx) => (
                                         <SkillCard key={skill.name} skill={skill} index={idx} />
                                     ))}

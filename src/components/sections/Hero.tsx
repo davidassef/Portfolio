@@ -77,8 +77,8 @@ export default function Hero({ locale }: HeroProps) {
             <div className="bg-gradient-radial absolute inset-0" />
             <Particles />
 
-            <div className="container relative z-10 py-20 pb-32">
-                <div className="flex flex-col lg:flex-row items-center justify-center gap-16 lg:gap-24">
+            <div className="container relative z-10 py-20 pb-28">
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-16">
                     {/* Avatar - Maior e mais destacado */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
@@ -91,19 +91,19 @@ export default function Hero({ locale }: HeroProps) {
                             alt={personalInfo.name}
                             width={320}
                             height={320}
-                            className="rounded-full"
+                            className="rounded-full w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-64 lg:h-64 xl:w-80 xl:h-80"
                             priority
                         />
                     </motion.div>
 
                     {/* Content */}
-                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl">
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-2xl w-full">
                         {/* Greeting - Maior */}
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="text-[var(--accent-cyan)] text-xl font-medium mb-3"
+                            className="text-[var(--accent-cyan)] text-xl font-medium mb-4"
                         >
                             {locale === 'en' ? "Hi, I'm" : 'Olá, sou'}
                         </motion.p>
@@ -113,7 +113,7 @@ export default function Hero({ locale }: HeroProps) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-5"
+                            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5"
                         >
                             <span className="text-gradient">{typedText}</span>
                             <span className="animate-pulse text-[var(--accent-cyan)]">|</span>
@@ -124,7 +124,7 @@ export default function Hero({ locale }: HeroProps) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="text-2xl sm:text-3xl text-[var(--text-secondary)] mb-8 font-light"
+                            className="text-2xl sm:text-3xl text-[var(--text-secondary)] mb-6 font-normal"
                         >
                             {locale === 'en' ? personalInfo.title.en : personalInfo.title.ptBR}
                         </motion.p>
@@ -134,7 +134,7 @@ export default function Hero({ locale }: HeroProps) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="text-lg text-[var(--text-secondary)] mb-20 max-w-xl leading-relaxed"
+                            className="text-lg text-[var(--text-secondary)] mb-16 max-w-xl leading-relaxed"
                         >
                             {locale === 'en' ? personalInfo.bio.en : personalInfo.bio.ptBR}
                         </motion.p>
@@ -144,7 +144,7 @@ export default function Hero({ locale }: HeroProps) {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
-                            className="flex flex-wrap items-center justify-center lg:justify-start gap-5"
+                            className="flex flex-wrap items-center justify-center lg:justify-start gap-6"
                         >
                             <button onClick={scrollToProjects} className="btn-primary">
                                 {locale === 'en' ? 'View Projects' : 'Ver Projetos'}
@@ -169,7 +169,7 @@ export default function Hero({ locale }: HeroProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 1 }}
-                className="absolute bottom-6 left-1/2 -translate-x-1/2"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2"
             >
                 <button
                     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}

@@ -40,6 +40,28 @@
   /* Fonts */
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+
+  /* Espaçamentos - Base 8px scale */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 0.75rem;   /* 12px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 2.5rem;   /* 40px */
+  --spacing-3xl: 3rem;     /* 48px */
+  --spacing-4xl: 4rem;     /* 64px */
+  --spacing-5xl: 5rem;     /* 80px */
+  --spacing-6xl: 6rem;     /* 96px */
+
+  /* Section Padding */
+  --section-padding-desktop: 7.5rem;  /* 120px */
+  --section-padding-tablet: 5rem;     /* 80px */
+  --section-padding-mobile: 3.75rem;  /* 60px */
+
+  /* Card Padding */
+  --card-padding-mobile: 1rem;   /* 16px */
+  --card-padding-tablet: 1.25rem; /* 20px */
+  --card-padding-desktop: 1.5rem; /* 24px */
 }
 
 @theme inline {
@@ -120,7 +142,14 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   border-radius: 20px;
+  padding: var(--card-padding-desktop);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+  .glass-card {
+    padding: var(--card-padding-mobile);
+  }
 }
 
 .glass-card:hover {
@@ -128,7 +157,12 @@ body {
   box-shadow:
     0 0 30px rgba(0, 240, 255, 0.15),
     inset 0 0 30px rgba(0, 240, 255, 0.03);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
+}
+
+/* Focus visível para acessibilidade */
+.glass-card:focus-within {
+  border-color: var(--border-glow);
 }
 
 /* ============================================
@@ -178,7 +212,7 @@ body {
 }
 
 .btn-primary:hover {
-  transform: scale(1.05) translateY(-2px);
+  transform: scale(1.02) translateY(-1px);
   box-shadow:
     0 0 20px rgba(0, 240, 255, 0.5),
     0 10px 40px rgba(0, 240, 255, 0.3);
@@ -207,6 +241,12 @@ body {
     0 0 20px rgba(0, 240, 255, 0.3),
     inset 0 0 20px rgba(0, 240, 255, 0.1);
   transform: translateY(-2px);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
 }
 
 /* ============================================
@@ -381,8 +421,20 @@ body {
    ============================================ */
 
 .section {
-  padding: 120px 0;
+  padding: var(--section-padding-desktop) 0;
   position: relative;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: var(--section-padding-tablet) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--section-padding-mobile) 0;
+  }
 }
 
 .section-title {
@@ -395,7 +447,13 @@ body {
 .section-subtitle {
   color: var(--text-secondary);
   font-size: 1.15rem;
-  margin-bottom: 4rem;
+  margin-bottom: var(--spacing-4xl);
+}
+
+@media (max-width: 768px) {
+  .section-subtitle {
+    margin-bottom: var(--spacing-3xl);
+  }
 }
 
 /* ============================================
@@ -424,7 +482,13 @@ body {
 
 .timeline {
   position: relative;
-  padding-left: 40px;
+  padding-left: var(--spacing-2xl);
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: var(--spacing-lg);
+  }
 }
 
 .timeline::before {
@@ -451,7 +515,7 @@ body {
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -46px;
+  left: calc(var(--spacing-2xl) * -1.15);
   top: 8px;
   width: 16px;
   height: 16px;
@@ -461,6 +525,14 @@ body {
     0 0 10px var(--accent-cyan),
     0 0 20px rgba(0, 240, 255, 0.5);
   border: 3px solid var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+  .timeline-item::before {
+    left: -28px;
+    width: 14px;
+    height: 14px;
+  }
 }
 
 /* ============================================
@@ -476,6 +548,18 @@ body {
   opacity: 0.5;
   animation: float 5s ease-in-out infinite;
   box-shadow: 0 0 6px var(--accent-cyan);
+}
+
+/* ============================================
+   SOCIAL LINKS
+   ============================================ */
+
+.social-link {
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
 /* ============================================

@@ -8,7 +8,6 @@ import About from '@/components/sections/About';
 import Skills from '@/components/sections/Skills';
 import Projects from '@/components/sections/Projects';
 import Experience from '@/components/sections/Experience';
-import GithubActivity from '@/components/sections/GithubActivity';
 import Contact from '@/components/sections/Contact';
 
 export default function Home() {
@@ -31,7 +30,6 @@ export default function Home() {
         <Skills locale={locale} />
         <Projects locale={locale} />
         <Experience locale={locale} />
-        {process.env.NODE_ENV === 'development' && <GithubActivity locale={locale} />}
         <Contact locale={locale} />
       </main>
 

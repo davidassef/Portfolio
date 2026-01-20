@@ -33,10 +33,7 @@ export default function Footer({ locale }: FooterProps) {
                             href={personalInfo.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all hover:shadow-lg"
-                            style={{ boxShadow: 'none' }}
-                            onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.3)'}
-                            onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                            className="social-link p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
                             aria-label="GitHub"
                         >
                             <Github size={22} />
@@ -45,18 +42,14 @@ export default function Footer({ locale }: FooterProps) {
                             href={personalInfo.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
-                            onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.3)'}
-                            onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                            className="social-link p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
                             aria-label="LinkedIn"
                         >
                             <Linkedin size={22} />
                         </a>
                         <a
                             href={`mailto:${personalInfo.email}`}
-                            className="p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
-                            onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 240, 255, 0.3)'}
-                            onMouseLeave={(e) => e.currentTarget.style.boxShadow = 'none'}
+                            className="social-link p-4 rounded-full bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
                             aria-label="Email"
                         >
                             <Mail size={22} />

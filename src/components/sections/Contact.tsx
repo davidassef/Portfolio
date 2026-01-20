@@ -68,9 +68,9 @@ export default function Contact({ locale }: ContactProps) {
                 </motion.div>
 
                 {/* Container centralizado */}
-                <div className="flex flex-col items-center gap-16">
+                <div className="flex flex-col items-center gap-12">
                     {/* Contact Cards - Grid centralizado com 5 itens */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 w-full max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 w-full max-w-4xl mx-auto">
                         {contactLinks.map((link, index) => (
                             <motion.div
                                 key={link.label}
@@ -84,15 +84,15 @@ export default function Contact({ locale }: ContactProps) {
                                         href={link.href}
                                         target={link.href.startsWith('mailto') ? undefined : '_blank'}
                                         rel="noopener noreferrer"
-                                        className="glass-card p-6 flex flex-col items-center text-center group cursor-pointer block h-full"
+                                        className="glass-card flex flex-col items-center text-center group cursor-pointer block h-full"
                                     >
                                         <div
-                                            className="w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
+                                            className="w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110"
                                             style={{ background: `${link.color}15` }}
                                         >
                                             <link.icon size={24} style={{ color: link.color }} />
                                         </div>
-                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-base">
+                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-sm">
                                             {link.label}
                                         </h3>
                                         <p className="text-xs text-[var(--text-muted)] group-hover:text-[var(--accent-cyan)] transition-colors">
@@ -100,14 +100,14 @@ export default function Contact({ locale }: ContactProps) {
                                         </p>
                                     </a>
                                 ) : (
-                                    <div className="glass-card p-6 flex flex-col items-center text-center h-full">
+                                    <div className="glass-card flex flex-col items-center text-center h-full">
                                         <div
                                             className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
                                             style={{ background: `${link.color}15` }}
                                         >
                                             <link.icon size={24} style={{ color: link.color }} />
                                         </div>
-                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-base">
+                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-sm">
                                             {link.label}
                                         </h3>
                                         <p className="text-xs text-[var(--text-muted)]">{link.value}</p>

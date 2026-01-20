@@ -29,7 +29,7 @@ export default function Experience({ locale }: ExperienceProps) {
 
                 {/* Container centralizado */}
                 <div className="flex justify-center">
-                    <div className="w-full max-w-3xl">
+                    <div className="w-full max-w-4xl">
                         <div className="timeline">
                             {experiences.map((exp, index) => {
                                 const role = locale === 'en' ? exp.role.en : exp.role.ptBR;
@@ -48,12 +48,12 @@ export default function Experience({ locale }: ExperienceProps) {
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                         className="timeline-item"
                                     >
-                                        <div className="glass-card p-8">
+                                        <div className="glass-card">
                                             {/* Header com grid para melhor layout */}
-                                            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                                            <div className="grid sm:grid-cols-2 gap-6 mb-4">
                                                 {/* Left: Role & Company */}
                                                 <div>
-                                                    <div className="flex items-center gap-3 mb-2">
+                                                    <div className="flex items-center gap-3 mb-3">
                                                         <h3 className="text-xl font-semibold text-[var(--text-primary)]">
                                                             {role}
                                                         </h3>
@@ -90,7 +90,7 @@ export default function Experience({ locale }: ExperienceProps) {
                                             </p>
 
                                             {/* Technologies */}
-                                            <div className="flex flex-wrap gap-3">
+                                            <div className="flex flex-wrap gap-2.5">
                                                 {exp.technologies.map((tech) => (
                                                     <span key={tech} className="badge">
                                                         {tech}

@@ -83,10 +83,12 @@ export default function Header({ locale, onLocaleChange }: HeaderProps) {
                     {/* Download CV Button */}
                     <Link
                         href={`/cv?lang=${locale}`}
-                        className="btn-primary text-sm py-3 px-6"
+                        className="btn-primary text-sm py-2 px-3 md:py-3 md:px-6 flex items-center gap-2"
                     >
-                        <Download size={18} />
-                        <span>{locale === 'en' ? 'Download CV' : 'Baixar CV'}</span>
+                        <Download size={16} className="md:hidden" />
+                        <Download size={18} className="hidden md:block" />
+                        <span className="hidden sm:inline">{locale === 'en' ? 'Download CV' : 'Baixar CV'}</span>
+                        <span className="sm:hidden">CV</span>
                     </Link>
                 </div>
 

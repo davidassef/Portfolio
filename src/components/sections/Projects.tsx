@@ -66,9 +66,9 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             className="glass-card overflow-hidden group flex flex-col h-full"
         >
             {/* Header */}
-            <div className="p-8 pb-6 flex-grow">
+            <div className="p-4 md:p-6 flex-grow">
                 {/* Title + Badges Row */}
-                <div className="flex flex-col gap-3 mb-4">
+                <div className="flex flex-col gap-4 mb-4">
                     <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors leading-tight">
                         {project.name}
                     </h3>
@@ -89,12 +89,12 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                     </div>
                 </div>
 
-                <p className="text-sm text-[var(--text-secondary)] mb-5 leading-relaxed line-clamp-3">
+                <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-3">
                     {description}
                 </p>
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                     {project.technologies.slice(0, 4).map((tech) => (
                         <span key={tech} className="badge text-xs">
                             {tech}
@@ -109,7 +109,7 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             </div>
 
             {/* Footer */}
-            <div className="px-8 py-5 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50 flex items-center gap-4">
+            <div className="px-4 py-3 md:px-6 md:py-4 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50 flex items-center gap-4">
                 {project.githubUrl ? (
                     <a
                         href={project.githubUrl}
@@ -188,7 +188,7 @@ export default function Projects({ locale }: ProjectsProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                 >
                     <h2 className="section-title text-gradient">
                         {locale === 'en' ? 'Featured Projects' : 'Projetos em Destaque'}
@@ -224,9 +224,9 @@ export default function Projects({ locale }: ProjectsProps) {
                 </motion.div>
 
                 {/* Projects Grid + CTA Container */}
-                <div className="flex flex-col gap-16">
+                <div className="flex flex-col gap-12">
                     {/* Projects Grid */}
-                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-7 px-2">
+                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
                         <AnimatePresence mode="popLayout">
                             {sortedProjects.map((project, index) => (
                                 <ProjectCard
