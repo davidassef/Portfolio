@@ -31,7 +31,7 @@ export default function Home() {
         <Skills locale={locale} />
         <Projects locale={locale} />
         <Experience locale={locale} />
-        <GithubActivity locale={locale} />
+        {process.env.NODE_ENV === 'development' && <GithubActivity locale={locale} />}
         <Contact locale={locale} />
       </main>
 

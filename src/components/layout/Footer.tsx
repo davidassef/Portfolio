@@ -1,6 +1,5 @@
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
 import { personalInfo } from '@/lib/data';
-import { VisitCounter } from './VisitCounter';
 
 interface FooterProps {
     locale: string;
@@ -26,26 +25,6 @@ export default function Footer({ locale }: FooterProps) {
                             © {currentYear} Assef Digital. {locale === 'en' ? 'Operated by' : 'Operado por'} David Assef Carneiro.{' '}
                             {locale === 'en' ? 'All rights reserved.' : 'Todos os direitos reservados.'}
                         </p>
-                        <VisitCounter locale={locale} />
-                        <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
-                            <a
-                                href="https://www.recibofast.com.br"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-[var(--accent-cyan)] transition-colors"
-                            >
-                                Privacy Policy
-                            </a>
-                            <span>|</span>
-                            <a
-                                href="https://www.recibofast.com.br"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-[var(--accent-cyan)] transition-colors"
-                            >
-                                Terms of Use
-                            </a>
-                        </div>
                     </div>
 
                     {/* Social Links - Maiores */}

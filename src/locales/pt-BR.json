@@ -65,8 +65,7 @@
     },
     "footer": {
         "rights": "Todos os direitos reservados.",
-        "madeWith": "Feito com",
-        "visits": "visitas"
+        "madeWith": "Feito com"
     },
     "cv": {
         "generating": "Gerando CV...",
