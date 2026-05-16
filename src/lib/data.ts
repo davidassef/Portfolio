@@ -45,6 +45,19 @@ export interface Experience {
     isCurrent?: boolean;
 }
 
+export interface Education {
+    id: string;
+    institution: string;
+    course: {
+        en: string;
+        ptBR: string;
+    };
+    status: 'in-progress' | 'completed' | 'paused';
+    startDate: string;
+    endDate?: string;
+    modality?: string;
+}
+
 export interface PersonalInfo {
     name: string;
     title: {
@@ -79,8 +92,8 @@ export const personalInfo: PersonalInfo = {
     location: "Fortaleza, CE - Brazil",
     avatarUrl: "https://avatars.githubusercontent.com/u/161294012?v=4",
     bio: {
-        en: "AI-driven developer building smart tools with ML, voice cloning & music generation. Clean code advocate with a passion for automated testing and comprehensive documentation.",
-        ptBR: "Desenvolvedor orientado por IA construindo ferramentas inteligentes com ML, clonagem de voz e geração de música. Defensor do código limpo com paixão por testes automatizados e documentação abrangente."
+        en: "Full-stack developer focused on building production-ready applications with React, Next.js, Go, and Python. Experienced in AI integration, cloud APIs, and delivering end-to-end solutions from architecture to deployment.",
+        ptBR: "Desenvolvedor full-stack focado em construir aplicações prontas para produção com React, Next.js, Go e Python. Experiente em integração de IA, APIs cloud e entrega de soluções completas da arquitetura ao deploy."
     }
 };
 
@@ -245,11 +258,14 @@ export const skills: Skill[] = [
     { name: "React", icon: "react", category: "frontend", level: 5 },
     { name: "Next.js", icon: "nextjs", category: "frontend", level: 5 },
     { name: "TypeScript", icon: "typescript", category: "frontend", level: 5 },
+    { name: "Angular", icon: "angular", category: "frontend", level: 3 },
     { name: "Tailwind CSS", icon: "tailwind", category: "frontend", level: 5 },
+    { name: "Vite", icon: "vite", category: "frontend", level: 4 },
     { name: "HTML/CSS", icon: "html", category: "frontend", level: 5 },
 
     // Backend
     { name: "Node.js", icon: "nodejs", category: "backend", level: 4 },
+    { name: "NestJS", icon: "nestjs", category: "backend", level: 4 },
     { name: "Go", icon: "go", category: "backend", level: 4 },
     { name: "Python", icon: "python", category: "backend", level: 5 },
     { name: "Django", icon: "django", category: "backend", level: 4 },
@@ -266,7 +282,8 @@ export const skills: Skill[] = [
     // Tools & DevOps
     { name: "Git", icon: "git", category: "tools", level: 5 },
     { name: "Docker", icon: "docker", category: "tools", level: 4 },
-    { name: "AWS (Lightsail/S3)", icon: "aws", category: "tools", level: 4 },
+    { name: "Meta Cloud API", icon: "meta", category: "tools", level: 4 },
+    { name: "AWS", icon: "aws", category: "tools", level: 4 },
     { name: "Vercel", icon: "vercel", category: "tools", level: 5 },
     { name: "Render", icon: "render", category: "tools", level: 4 },
     { name: "Linux/VPS", icon: "linux", category: "tools", level: 4 },
@@ -293,6 +310,22 @@ export const experiences: Experience[] = [
         isCurrent: true
     },
     {
+        id: "supernosso-crm",
+        company: "Supernosso",
+        role: {
+            en: "Full-Stack Developer (Contract)",
+            ptBR: "Desenvolvedor Full-Stack (Contrato)"
+        },
+        description: {
+            en: "Building a custom CRM system for a supermarket chain. Full-stack development with NestJS and React, including Meta Cloud API integration for customer communication workflows.",
+            ptBR: "Construindo um sistema CRM personalizado para uma rede de supermercados. Desenvolvimento full-stack com NestJS e React, incluindo integração com Meta Cloud API para fluxos de comunicação com clientes."
+        },
+        startDate: "Mar 2025",
+        technologies: ["NestJS", "React", "Vite", "Meta Cloud API", "PostgreSQL"],
+        location: "Remote",
+        isCurrent: true
+    },
+    {
         id: "freelance",
         company: "Freelance",
         role: {
@@ -303,9 +336,26 @@ export const experiences: Experience[] = [
             en: "Building custom software solutions for clients, specializing in AI integration, web applications, and automation tools. Delivering end-to-end solutions from architecture to deployment.",
             ptBR: "Construindo soluções de software personalizadas para clientes, especializado em integração de IA, aplicações web e ferramentas de automação. Entregando soluções completas da arquitetura ao deploy."
         },
-        startDate: "2025",
-        technologies: ["React", "Next.js", "Python", "Go", "AI/ML"],
+        startDate: "2024",
+        technologies: ["React", "Next.js", "Python", "Go", "Django", "Angular", "AI/ML"],
         location: "Remote"
+    }
+];
+
+// ============================================
+// FORMAÇÃO ACADÊMICA
+// ============================================
+export const education: Education[] = [
+    {
+        id: "ads-descomplica",
+        institution: "Faculdade Descomplica",
+        course: {
+            en: "Systems Analysis and Development",
+            ptBR: "Análise e Desenvolvimento de Sistemas"
+        },
+        status: "in-progress",
+        startDate: "2024",
+        modality: "EAD"
     }
 ];
 
@@ -315,5 +365,5 @@ export const experiences: Experience[] = [
 export const stats = {
     projects: projects.length,
     technologies: new Set(skills.map(s => s.name)).size,
-    yearsExp: 1
+    yearsExp: 2
 };
