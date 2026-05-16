@@ -11,7 +11,7 @@ import Experience from '@/components/sections/Experience';
 import Contact from '@/components/sections/Contact';
 
 export default function Home() {
-  const [locale, setLocale] = useState<'en' | 'pt-BR'>('en');
+  const [locale, setLocale] = useState<'en' | 'pt-BR'>('pt-BR');
 
   const handleLocaleChange = useCallback((newLocale: string) => {
     setLocale(newLocale as 'en' | 'pt-BR');

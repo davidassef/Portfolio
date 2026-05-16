@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, MapPin, Send, MessageCircle } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, MessageCircle, Send } from 'lucide-react';
 import { personalInfo } from '@/lib/data';
 
 interface ContactProps {
@@ -43,7 +43,7 @@ export default function Contact({ locale }: ContactProps) {
             label: locale === 'en' ? 'Location' : 'Localização',
             value: personalInfo.location,
             href: null,
-            color: 'var(--accent-cyan)',
+            color: 'var(--text-muted)',
         },
     ];
 
@@ -55,7 +55,7 @@ export default function Contact({ locale }: ContactProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-20"
+                    className="text-center mb-12"
                 >
                     <h2 className="section-title text-gradient">
                         {locale === 'en' ? "Let's Connect" : 'Vamos Conectar'}
@@ -67,59 +67,47 @@ export default function Contact({ locale }: ContactProps) {
                     </p>
                 </motion.div>
 
-                {/* Container centralizado */}
-                <div className="flex flex-col items-center gap-12">
-                    {/* Contact Cards - Grid centralizado com 5 itens */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 w-full max-w-4xl mx-auto">
+                <div className="max-w-2xl mx-auto">
+                    {/* Contact links — lista compacta */}
+                    <div className="flex flex-col gap-3 mb-10">
                         {contactLinks.map((link, index) => (
                             <motion.div
                                 key={link.label}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                initial={{ opacity: 0, x: -15 }}
+                                whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: index * 0.1 }}
+                                transition={{ duration: 0.3, delay: index * 0.08 }}
                             >
                                 {link.href ? (
                                     <a
                                         href={link.href}
                                         target={link.href.startsWith('mailto') ? undefined : '_blank'}
                                         rel="noopener noreferrer"
-                                        className="glass-card flex flex-col items-center text-center group cursor-pointer block h-full"
+                                        className="flex items-center gap-4 px-5 py-4 rounded-xl border border-[var(--border-subtle)] hover:border-[var(--border-glow)] transition-all group"
+                                        style={{ backgroundColor: 'rgba(17, 17, 40, 0.5)' }}
                                     >
-                                        <div
-                                            className="w-14 h-14 rounded-full flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110"
-                                            style={{ background: `${link.color}15` }}
-                                        >
-                                            <link.icon size={24} style={{ color: link.color }} />
+                                        <link.icon size={20} style={{ color: link.color }} className="flex-shrink-0 group-hover:scale-110 transition-transform" />
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3 flex-grow">
+                                            <span className="text-sm font-medium text-[var(--text-primary)]">{link.label}</span>
+                                            <span className="text-xs text-[var(--text-muted)] font-mono group-hover:text-[var(--accent-cyan)] transition-colors">{link.value}</span>
                                         </div>
-                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-sm">
-                                            {link.label}
-                                        </h3>
-                                        <p className="text-xs text-[var(--text-muted)] group-hover:text-[var(--accent-cyan)] transition-colors">
-                                            {link.value}
-                                        </p>
                                     </a>
                                 ) : (
-                                    <div className="glass-card flex flex-col items-center text-center h-full">
-                                        <div
-                                            className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
-                                            style={{ background: `${link.color}15` }}
-                                        >
-                                            <link.icon size={24} style={{ color: link.color }} />
+                                    <div className="flex items-center gap-4 px-5 py-4 rounded-xl border border-[var(--border-subtle)]" style={{ backgroundColor: 'rgba(17, 17, 40, 0.5)' }}>
+                                        <link.icon size={20} style={{ color: link.color }} className="flex-shrink-0" />
+                                        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-3">
+                                            <span className="text-sm font-medium text-[var(--text-primary)]">{link.label}</span>
+                                            <span className="text-xs text-[var(--text-muted)] font-mono">{link.value}</span>
                                         </div>
-                                        <h3 className="font-semibold text-[var(--text-primary)] mb-1 text-sm">
-                                            {link.label}
-                                        </h3>
-                                        <p className="text-xs text-[var(--text-muted)]">{link.value}</p>
                                     </div>
                                 )}
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* CTA - Centralizado com espaço */}
+                    {/* CTA */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.4 }}
@@ -127,9 +115,9 @@ export default function Contact({ locale }: ContactProps) {
                     >
                         <a
                             href={`mailto:${personalInfo.email}`}
-                            className="btn-primary inline-flex text-lg px-10 py-5"
+                            className="btn-primary inline-flex text-base px-8 py-4"
                         >
-                            <Send size={22} />
+                            <Send size={18} />
                             <span>{locale === 'en' ? 'Send me an email' : 'Me envie um email'}</span>
                         </a>
                     </motion.div>

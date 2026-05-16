@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
-import { experiences } from '@/lib/data';
+import { Briefcase, Calendar, MapPin, GraduationCap } from 'lucide-react';
+import { experiences, education } from '@/lib/data';
 
 interface ExperienceProps {
     locale: string;
@@ -17,7 +17,7 @@ export default function Experience({ locale }: ExperienceProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-20"
+                    className="text-center mb-16"
                 >
                     <h2 className="section-title text-gradient">
                         {locale === 'en' ? 'Experience' : 'Experiência'}
@@ -27,17 +27,16 @@ export default function Experience({ locale }: ExperienceProps) {
                     </p>
                 </motion.div>
 
-                {/* Container centralizado */}
                 <div className="flex justify-center">
-                    <div className="w-full max-w-4xl">
+                    <div className="w-full max-w-3xl">
                         <div className="timeline">
+                            {/* Experiências profissionais */}
                             {experiences.map((exp, index) => {
                                 const role = locale === 'en' ? exp.role.en : exp.role.ptBR;
                                 const description = locale === 'en' ? exp.description.en : exp.description.ptBR;
                                 const endDate = exp.endDate
                                     ? exp.endDate
                                     : locale === 'en' ? 'Present' : 'Presente';
-                                const location = exp.location || 'Remote';
 
                                 return (
                                     <motion.div
@@ -48,55 +47,103 @@ export default function Experience({ locale }: ExperienceProps) {
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                         className="timeline-item"
                                     >
-                                        <div className="glass-card">
-                                            {/* Header com grid para melhor layout */}
-                                            <div className="grid sm:grid-cols-2 gap-6 mb-4">
-                                                {/* Left: Role & Company */}
+                                        <div className="glass-card border-l-2 border-l-[var(--accent-cyan)]">
+                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                                                 <div>
-                                                    <div className="flex items-center gap-3 mb-3">
-                                                        <h3 className="text-xl font-semibold text-[var(--text-primary)]">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <h3 className="text-base font-semibold text-[var(--text-primary)] font-mono">
                                                             {role}
                                                         </h3>
                                                         {exp.isCurrent && (
-                                                            <span className="badge badge-green text-xs">
+                                                            <span className="badge badge-green text-[10px]">
                                                                 {locale === 'en' ? 'Current' : 'Atual'}
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="flex items-center gap-3 text-[var(--accent-cyan)]">
-                                                        <Briefcase size={18} />
-                                                        <span className="text-base font-medium">{exp.company}</span>
+                                                    <div className="flex items-center gap-2 text-[var(--accent-cyan)]">
+                                                        <Briefcase size={14} />
+                                                        <span className="text-sm font-medium">{exp.company}</span>
                                                     </div>
                                                 </div>
 
-                                                {/* Right: Date & Location */}
-                                                <div className="sm:text-right space-y-2">
-                                                    <div className="flex items-center gap-3 sm:justify-end text-[var(--text-muted)]">
-                                                        <Calendar size={16} />
-                                                        <span className="text-sm font-medium">
+                                                <div className="flex flex-col gap-1 sm:text-right">
+                                                    <div className="flex items-center gap-2 sm:justify-end text-[var(--text-muted)]">
+                                                        <Calendar size={13} />
+                                                        <span className="text-xs font-mono">
                                                             {exp.startDate} — {endDate}
                                                         </span>
                                                     </div>
-                                                    <div className="flex items-center gap-3 sm:justify-end text-[var(--text-muted)]">
-                                                        <MapPin size={16} />
-                                                        <span className="text-sm">{location}</span>
-                                                    </div>
+                                                    {exp.location && (
+                                                        <div className="flex items-center gap-2 sm:justify-end text-[var(--text-muted)]">
+                                                            <MapPin size={13} />
+                                                            <span className="text-xs">{exp.location}</span>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             </div>
 
-                                            {/* Description */}
-                                            <p className="text-[var(--text-secondary)] mb-6 leading-relaxed text-base">
+                                            <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
                                                 {description}
                                             </p>
 
-                                            {/* Technologies */}
-                                            <div className="flex flex-wrap gap-2.5">
+                                            <div className="flex flex-wrap gap-2">
                                                 {exp.technologies.map((tech) => (
-                                                    <span key={tech} className="badge">
+                                                    <span key={tech} className="badge text-xs">
                                                         {tech}
                                                     </span>
                                                 ))}
                                             </div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+
+                            {/* Formação acadêmica */}
+                            {education.map((edu, index) => {
+                                const course = locale === 'en' ? edu.course.en : edu.course.ptBR;
+                                const statusLabel = edu.status === 'in-progress'
+                                    ? (locale === 'en' ? 'In Progress' : 'Em Andamento')
+                                    : (locale === 'en' ? 'Completed' : 'Concluído');
+
+                                return (
+                                    <motion.div
+                                        key={edu.id}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.5, delay: (experiences.length + index) * 0.1 }}
+                                        className="timeline-item education"
+                                    >
+                                        <div className="glass-card border-l-2 border-l-[var(--accent-amber)]">
+                                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+                                                <div>
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <h3 className="text-base font-semibold text-[var(--text-primary)] font-mono">
+                                                            {course}
+                                                        </h3>
+                                                        <span className="badge badge-yellow text-[10px]">
+                                                            {statusLabel}
+                                                        </span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-[var(--accent-amber)]">
+                                                        <GraduationCap size={14} />
+                                                        <span className="text-sm font-medium">{edu.institution}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-2 text-[var(--text-muted)]">
+                                                    <Calendar size={13} />
+                                                    <span className="text-xs font-mono">
+                                                        {edu.startDate} — {edu.endDate || (locale === 'en' ? 'Present' : 'Presente')}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {edu.modality && (
+                                                <span className="text-xs text-[var(--text-muted)]">
+                                                    {edu.modality}
+                                                </span>
+                                            )}
                                         </div>
                                     </motion.div>
                                 );

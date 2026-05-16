@@ -16,44 +16,21 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
 
     const getStatusBadge = () => {
         if (!project.status) return null;
-
-        if (project.status === 'production') {
-            return (
-                <span className="badge badge-green text-xs">
-                    <Rocket size={10} className="mr-1" />
-                    {locale === 'en' ? 'Live' : 'Produção'}
-                </span>
-            );
-        }
-
-        if (project.status === 'staging') {
-            return (
-                <span className="badge badge-yellow text-xs">
-                    <Rocket size={10} className="mr-1" />
-                    {locale === 'en' ? 'Staging' : 'Homologação'}
-                </span>
-            );
-        }
-
-        if (project.status === 'development') {
-            return (
-                <span className="badge badge-yellow text-xs">
-                    <Code size={10} className="mr-1" />
-                    {locale === 'en' ? 'In Dev' : 'Em Dev'}
-                </span>
-            );
-        }
-
-        if (project.status === 'challenge') {
-            return (
-                <span className="badge badge-purple text-xs">
-                    <Star size={10} className="mr-1" />
-                    {locale === 'en' ? 'Challenge' : 'Desafio'}
-                </span>
-            );
-        }
-
-        return null;
+        const configs: Record<string, { className: string; icon: typeof Rocket; label: { en: string; pt: string } }> = {
+            production: { className: 'badge-green', icon: Rocket, label: { en: 'Live', pt: 'Produção' } },
+            staging: { className: 'badge-yellow', icon: Rocket, label: { en: 'Staging', pt: 'Homologação' } },
+            development: { className: 'badge-yellow', icon: Code, label: { en: 'In Dev', pt: 'Em Dev' } },
+            challenge: { className: 'badge-purple', icon: Star, label: { en: 'Challenge', pt: 'Desafio' } },
+        };
+        const config = configs[project.status];
+        if (!config) return null;
+        const Icon = config.icon;
+        return (
+            <span className={`badge ${config.className} text-xs`}>
+                <Icon size={10} className="mr-1" />
+                {locale === 'en' ? config.label.en : config.label.pt}
+            </span>
+        );
     };
 
     return (
@@ -63,19 +40,25 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="glass-card overflow-hidden group flex flex-col h-full"
+            className="glass-card overflow-hidden group flex flex-col h-full relative"
         >
-            {/* Header */}
-            <div className="p-4 md:p-6 flex-grow">
-                {/* Title + Badges Row */}
-                <div className="flex flex-col gap-4 mb-4">
-                    <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors leading-tight">
+            {/* Scan line on hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
+                <div
+                    className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-cyan)] to-transparent"
+                    style={{ animation: 'scan-line 2s linear infinite' }}
+                />
+            </div>
+
+            <div className="p-5 md:p-6 flex-grow relative">
+                <div className="flex flex-col gap-3 mb-4">
+                    <h3 className="text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors leading-tight font-mono">
                         {project.name}
                     </h3>
                     <div className="flex items-center gap-2 flex-wrap">
                         {project.stars > 0 && (
                             <span className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-                                <Star size={12} className="fill-yellow-500 text-yellow-500" />
+                                <Star size={12} className="fill-amber-400 text-amber-400" />
                                 {project.stars}
                             </span>
                         )}
@@ -93,23 +76,21 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                     {description}
                 </p>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2.5">
+                <div className="flex flex-wrap gap-2">
                     {project.technologies.slice(0, 4).map((tech) => (
                         <span key={tech} className="badge text-xs">
                             {tech}
                         </span>
                     ))}
                     {project.technologies.length > 4 && (
-                        <span className="text-xs text-[var(--text-muted)]">
+                        <span className="text-xs text-[var(--text-muted)] font-mono">
                             +{project.technologies.length - 4}
                         </span>
                     )}
                 </div>
             </div>
 
-            {/* Footer */}
-            <div className="px-4 py-3 md:px-6 md:py-4 border-t border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50 flex items-center gap-4">
+            <div className="px-5 py-3 md:px-6 md:py-4 border-t border-[var(--border-subtle)] flex items-center gap-4" style={{ backgroundColor: 'rgba(17, 17, 40, 0.3)' }}>
                 {project.githubUrl ? (
                     <a
                         href={project.githubUrl}
@@ -117,8 +98,8 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
                     >
-                        <Github size={18} />
-                        <span>{locale === 'en' ? 'View Code' : 'Ver Código'}</span>
+                        <Github size={16} />
+                        <span className="font-mono text-xs">{locale === 'en' ? 'Code' : 'Código'}</span>
                     </a>
                 ) : project.liveUrl ? (
                     <a
@@ -127,15 +108,15 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
                     >
-                        <ExternalLink size={18} />
-                        <span>{locale === 'en' ? 'Live Demo' : 'Demo'}</span>
+                        <ExternalLink size={16} />
+                        <span className="font-mono text-xs">Demo</span>
                     </a>
                 ) : (
-                    <span className="text-sm text-[var(--text-muted)] italic flex items-center gap-2">
-                        <Lock size={14} />
+                    <span className="text-xs text-[var(--text-muted)] italic flex items-center gap-2 font-mono">
+                        <Lock size={12} />
                         {project.status === 'development'
-                            ? (locale === 'en' ? 'Under development' : 'Em desenvolvimento')
-                            : (locale === 'en' ? 'Private repository' : 'Repositório privado')}
+                            ? (locale === 'en' ? 'In development' : 'Em desenvolvimento')
+                            : (locale === 'en' ? 'Private repo' : 'Repo privado')}
                     </span>
                 )}
 
@@ -146,8 +127,8 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
                     >
-                        <ExternalLink size={18} />
-                        <span>{locale === 'en' ? 'Demo' : 'Demo'}</span>
+                        <ExternalLink size={16} />
+                        <span className="font-mono text-xs">Demo</span>
                     </a>
                 )}
             </div>
@@ -165,7 +146,6 @@ export default function Projects({ locale }: ProjectsProps) {
         return true;
     });
 
-    // Ordenar: featured primeiro, depois públicos
     const sortedProjects = [...filteredProjects].sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
@@ -188,10 +168,10 @@ export default function Projects({ locale }: ProjectsProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-20"
+                    className="text-center mb-16"
                 >
                     <h2 className="section-title text-gradient">
-                        {locale === 'en' ? 'Featured Projects' : 'Projetos em Destaque'}
+                        {locale === 'en' ? 'Projects' : 'Projetos'}
                     </h2>
                     <p className="section-subtitle">
                         {locale === 'en'
@@ -206,27 +186,25 @@ export default function Projects({ locale }: ProjectsProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.2 }}
-                    className="flex justify-center gap-3 mb-20"
+                    className="flex justify-center gap-2 mb-12"
                 >
                     {filters.map((f) => (
                         <button
                             key={f.value}
                             onClick={() => setFilter(f.value)}
-                            className={`px-6 py-3 rounded-full text-sm font-semibold transition-all ${filter === f.value
-                                ? 'bg-[var(--accent-cyan)] text-[var(--bg-primary)] shadow-lg'
+                            className={`px-5 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${filter === f.value
+                                ? 'bg-[var(--accent-cyan)] text-[var(--bg-primary)]'
                                 : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-card)]'
                                 }`}
-                            style={filter === f.value ? { boxShadow: '0 0 20px rgba(0, 240, 255, 0.4)' } : {}}
+                            style={filter === f.value ? { boxShadow: '0 0 15px rgba(14, 246, 204, 0.3)' } : {}}
                         >
                             {locale === 'en' ? f.labelEn : f.labelPt}
                         </button>
                     ))}
                 </motion.div>
 
-                {/* Projects Grid + CTA Container */}
-                <div className="flex flex-col gap-12">
-                    {/* Projects Grid */}
-                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
+                <div className="flex flex-col gap-10">
+                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                         <AnimatePresence mode="popLayout">
                             {sortedProjects.map((project, index) => (
                                 <ProjectCard
@@ -239,12 +217,11 @@ export default function Projects({ locale }: ProjectsProps) {
                         </AnimatePresence>
                     </motion.div>
 
-                    {/* GitHub Link */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
                         className="text-center"
                     >
                         <a
@@ -253,7 +230,7 @@ export default function Projects({ locale }: ProjectsProps) {
                             rel="noopener noreferrer"
                             className="btn-secondary inline-flex"
                         >
-                            <Github size={20} />
+                            <Github size={18} />
                             <span>{locale === 'en' ? 'View all on GitHub' : 'Ver todos no GitHub'}</span>
                         </a>
                     </motion.div>

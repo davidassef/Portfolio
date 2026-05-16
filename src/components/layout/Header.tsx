@@ -12,7 +12,7 @@ interface HeaderProps {
 
 const navItems = [
     { id: 'about', labelEn: 'About', labelPt: 'Sobre' },
-    { id: 'skills', labelEn: 'Skills', labelPt: 'Habilidades' },
+    { id: 'skills', labelEn: 'Skills', labelPt: 'Skills' },
     { id: 'projects', labelEn: 'Projects', labelPt: 'Projetos' },
     { id: 'experience', labelEn: 'Experience', labelPt: 'Experiência' },
     { id: 'contact', labelEn: 'Contact', labelPt: 'Contato' },
@@ -41,97 +41,95 @@ export default function Header({ locale, onLocaleChange }: HeaderProps) {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                ? 'bg-[var(--bg-primary)]/95 backdrop-blur-lg border-b border-[var(--border-subtle)] shadow-lg'
+                ? 'backdrop-blur-lg border-b border-[var(--border-subtle)]'
                 : 'bg-transparent'
                 }`}
+            style={isScrolled ? { backgroundColor: 'rgba(6, 6, 16, 0.95)' } : undefined}
         >
-            <div className="container flex items-center justify-between h-20">
-                {/* Logo com efeito de glow */}
+            <div className="container flex items-center justify-between h-16 lg:h-20">
+                {/* Logo */}
                 <Link
                     href="/"
-                    className="text-xl font-bold tracking-tight hover:text-[var(--accent-cyan)] transition-colors group"
+                    className="font-mono text-lg font-bold tracking-tight hover:text-[var(--accent-cyan)] transition-colors group"
                 >
-                    <span className="text-gradient group-hover:animate-logo-pulse">{personalInfo.name.split(' ')[0]}</span>
+                    <span className="text-gradient">{personalInfo.name.split(' ')[0].toLowerCase()}</span>
                     <span className="text-[var(--text-muted)]">.dev</span>
+                    <span className="inline-block w-[2px] h-4 bg-[var(--accent-cyan)] ml-0.5 align-middle animate-blink" />
                 </Link>
 
-                {/* Desktop Navigation - Textos maiores */}
-                <nav className="hidden md:flex items-center gap-10">
+                {/* Desktop Navigation */}
+                <nav className="hidden md:flex items-center gap-8">
                     {navItems.map((item) => (
                         <button
                             key={item.id}
                             onClick={() => scrollToSection(item.id)}
-                            className="text-[15px] font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative group"
+                            className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors relative group"
                         >
                             {locale === 'en' ? item.labelEn : item.labelPt}
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent-cyan)] group-hover:w-full transition-all duration-300" />
+                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-[var(--accent-cyan)] group-hover:w-full transition-all duration-300" />
                         </button>
                     ))}
                 </nav>
 
                 {/* Actions */}
-                <div className="hidden md:flex items-center gap-5">
-                    {/* Language Toggle */}
+                <div className="hidden md:flex items-center gap-3">
                     <button
                         onClick={() => onLocaleChange(locale === 'en' ? 'pt-BR' : 'en')}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all border border-transparent hover:border-[var(--border-glow)]"
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-mono font-medium text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all border border-transparent hover:border-[var(--border-glow)]"
                     >
-                        <Globe size={18} />
+                        <Globe size={14} />
                         <span>{locale === 'en' ? 'PT' : 'EN'}</span>
                     </button>
 
-                    {/* Download CV Button */}
                     <Link
                         href={`/cv?lang=${locale}`}
-                        className="btn-primary text-sm py-2 px-3 md:py-3 md:px-6 flex items-center gap-2"
+                        className="btn-primary text-xs py-2.5 px-5 flex items-center gap-2"
                     >
-                        <Download size={16} className="md:hidden" />
-                        <Download size={18} className="hidden md:block" />
-                        <span className="hidden sm:inline">{locale === 'en' ? 'Download CV' : 'Baixar CV'}</span>
-                        <span className="sm:hidden">CV</span>
+                        <Download size={14} />
+                        <span className="hidden sm:inline">CV</span>
                     </Link>
                 </div>
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden p-3 text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
+                    className="md:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] transition-colors"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                    {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
 
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="md:hidden absolute top-20 left-0 right-0 bg-[var(--bg-secondary)]/98 backdrop-blur-lg border-b border-[var(--border-subtle)]">
-                    <nav className="container py-8 flex flex-col gap-2">
+                <div className="md:hidden absolute top-16 left-0 right-0 backdrop-blur-lg border-b border-[var(--border-subtle)]" style={{ backgroundColor: 'rgba(11, 11, 26, 0.98)' }}>
+                    <nav className="container py-6 flex flex-col gap-1">
                         {navItems.map((item) => (
                             <button
                                 key={item.id}
                                 onClick={() => scrollToSection(item.id)}
-                                className="text-left py-4 px-4 rounded-lg text-lg text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all"
+                                className="text-left py-3 px-4 rounded-lg text-base text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-tertiary)] transition-all font-medium"
                             >
                                 {locale === 'en' ? item.labelEn : item.labelPt}
                             </button>
                         ))}
-                        <hr className="border-[var(--border-subtle)] my-4" />
-                        <div className="flex items-center justify-between px-4 pt-2">
+                        <hr className="border-[var(--border-subtle)] my-3" />
+                        <div className="flex items-center justify-between px-4 pt-1">
                             <button
                                 onClick={() => {
                                     onLocaleChange(locale === 'en' ? 'pt-BR' : 'en');
                                     setIsMobileMenuOpen(false);
                                 }}
-                                className="flex items-center gap-3 text-[var(--text-secondary)] text-lg"
+                                className="flex items-center gap-2 text-[var(--text-secondary)] text-sm font-mono"
                             >
-                                <Globe size={20} />
+                                <Globe size={16} />
                                 <span>{locale === 'en' ? 'Português' : 'English'}</span>
                             </button>
                             <Link
                                 href={`/cv?lang=${locale}`}
-                                className="btn-primary text-sm py-3 px-5"
+                                className="btn-primary text-xs py-2.5 px-5"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
-                                <Download size={18} />
+                                <Download size={14} />
                                 <span>CV</span>
                             </Link>
                         </div>

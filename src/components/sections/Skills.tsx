@@ -15,39 +15,45 @@ const categoryLabels = {
     tools: { en: 'Tools & DevOps', pt: 'Ferramentas & DevOps' },
 };
 
-const categoryColors = {
+const categoryColors: Record<string, string> = {
     frontend: 'var(--accent-cyan)',
     backend: 'var(--accent-purple)',
     ai: 'var(--accent-pink)',
     tools: 'var(--accent-green)',
 };
 
-function SkillCard({ skill, index }: { skill: Skill; index: number }) {
-    const barWidth = (skill.level / 5) * 100;
+function SkillChip({ skill, index }: { skill: Skill; index: number }) {
     const color = categoryColors[skill.category];
+    const dots = Array.from({ length: 5 }, (_, i) => i < skill.level);
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="glass-card"
+            transition={{ duration: 0.3, delay: index * 0.03 }}
+            className="skill-chip group"
+            style={{ '--chip-color': color } as React.CSSProperties}
         >
-            <div className="flex items-center justify-between mb-5">
-                <span className="font-semibold text-[var(--text-primary)] text-base">{skill.name}</span>
-                <span className="text-sm text-[var(--text-muted)] font-medium">{skill.level}/5</span>
+            <span className="text-[var(--text-primary)] group-hover:text-[var(--accent-cyan)] transition-colors">
+                {skill.name}
+            </span>
+            <div className="flex gap-1 ml-1">
+                {dots.map((filled, i) => (
+                    <span
+                        key={i}
+                        className="w-1.5 h-1.5 rounded-full transition-all duration-300"
+                        style={{
+                            background: filled ? color : 'var(--bg-tertiary)',
+                            boxShadow: filled ? `0 0 4px ${color}` : 'none',
+                        }}
+                    />
+                ))}
             </div>
-            <div className="skill-bar">
-                <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${barWidth}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="skill-bar-fill"
-                    style={{ background: `linear-gradient(90deg, ${color}, var(--accent-cyan))` }}
-                />
-            </div>
+            <span
+                className="absolute bottom-0 left-0 h-[2px]"
+                style={{ background: color, width: '0%' }}
+            />
         </motion.div>
     );
 }
@@ -63,7 +69,7 @@ export default function Skills({ locale }: SkillsProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="text-center mb-20"
+                    className="text-center mb-16"
                 >
                     <h2 className="section-title text-gradient">
                         {locale === 'en' ? 'Tech Stack' : 'Stack Tecnológico'}
@@ -75,8 +81,8 @@ export default function Skills({ locale }: SkillsProps) {
                     </p>
                 </motion.div>
 
-                <div className="flex flex-col gap-12">
-                    {categories.map((category, catIndex) => {
+                <div className="flex flex-col gap-10">
+                    {categories.map((category) => {
                         const categorySkills = skills.filter((s) => s.category === category);
                         const color = categoryColors[category];
 
@@ -87,18 +93,16 @@ export default function Skills({ locale }: SkillsProps) {
                                 whileInView={{ opacity: 1 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5 }}
-                                className={catIndex < categories.length - 1 ? "pb-8 border-b border-[var(--border-subtle)]" : ""}
                             >
-                                {/* Título da categoria com mais espaço */}
                                 <h3
-                                    className="text-xl font-semibold mb-6 flex items-center gap-4"
+                                    className="text-sm font-mono font-semibold mb-4 flex items-center gap-3 uppercase tracking-wider"
                                     style={{ color }}
                                 >
                                     <span
-                                        className="w-4 h-4 rounded-full"
+                                        className="w-2.5 h-2.5 rounded-sm"
                                         style={{
                                             background: color,
-                                            boxShadow: `0 0 15px ${color}`
+                                            boxShadow: `0 0 10px ${color}`
                                         }}
                                     />
                                     {locale === 'en'
@@ -106,10 +110,9 @@ export default function Skills({ locale }: SkillsProps) {
                                         : categoryLabels[category].pt}
                                 </h3>
 
-                                {/* Grid de skills */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+                                <div className="flex flex-wrap gap-3">
                                     {categorySkills.map((skill, idx) => (
-                                        <SkillCard key={skill.name} skill={skill} index={idx} />
+                                        <SkillChip key={skill.name} skill={skill} index={idx} />
                                     ))}
                                 </div>
                             </motion.div>
