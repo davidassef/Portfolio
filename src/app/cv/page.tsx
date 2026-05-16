@@ -2,18 +2,17 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { personalInfo, skills, experiences, projects } from '@/lib/data';
+import { personalInfo, skills, experiences, projects, education } from '@/lib/data';
 import { Download, Mail, Github, Linkedin, MapPin, Phone } from 'lucide-react';
 
 function CVContent() {
     const searchParams = useSearchParams();
-    const locale = searchParams.get('lang') === 'pt-BR' ? 'pt-BR' : 'en';
+    const locale = searchParams.get('lang') === 'en' ? 'en' : 'pt-BR';
 
     const handleDownload = () => {
         window.print();
     };
 
-    // Agrupa skills por categoria
     const skillsPorCategoria = skills.reduce((acc, skill) => {
         if (!acc[skill.category]) acc[skill.category] = [];
         acc[skill.category].push(skill.name);
@@ -27,29 +26,28 @@ function CVContent() {
         tools: { en: 'Tools & DevOps', ptBR: 'Ferramentas & DevOps' }
     };
 
-    // Projetos destacados
     const projetosDestacados = projects.filter(p => p.featured);
 
-    // Textos localizados
     const t = {
         downloadPdf: locale === 'en' ? 'Download PDF' : 'Baixar PDF',
         summary: locale === 'en' ? 'Professional Summary' : 'Resumo Profissional',
         experience: locale === 'en' ? 'Experience' : 'Experiência',
+        education: locale === 'en' ? 'Education' : 'Formação Acadêmica',
         skills: locale === 'en' ? 'Technical Skills' : 'Habilidades Técnicas',
         projects: locale === 'en' ? 'Featured Projects' : 'Projetos em Destaque',
         present: locale === 'en' ? 'Present' : 'Atual',
-        portfolioAt: locale === 'en' ? 'Full portfolio available at' : 'Portfólio completo em'
+        inProgress: locale === 'en' ? 'In Progress' : 'Em Andamento',
+        portfolioAt: locale === 'en' ? 'Full portfolio at' : 'Portfólio completo em'
     };
 
     return (
         <div className="cv-page">
-            {/* Botão de Download - escondido na impressão */}
             <button
                 onClick={handleDownload}
                 className="cv-download-btn no-print"
                 aria-label="Download CV"
             >
-                <Download size={20} />
+                <Download size={18} />
                 <span>{t.downloadPdf}</span>
             </button>
 
@@ -106,7 +104,7 @@ function CVContent() {
                                         <p className="cv-company">{exp.company} • {exp.location}</p>
                                     </div>
                                     <span className="cv-date">
-                                        {exp.startDate} - {exp.endDate || t.present}
+                                        {exp.startDate} — {exp.endDate || t.present}
                                     </span>
                                 </div>
                                 <p className="cv-exp-desc">
@@ -117,6 +115,26 @@ function CVContent() {
                                         <span key={tech} className="cv-tech">{tech}</span>
                                     ))}
                                 </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Formação */}
+                <section className="cv-section">
+                    <h2>{t.education}</h2>
+                    <div className="cv-education">
+                        {education.map((edu) => (
+                            <div key={edu.id} className="cv-edu-item">
+                                <div>
+                                    <h3>{locale === 'en' ? edu.course.en : edu.course.ptBR}</h3>
+                                    <p className="cv-institution">
+                                        {edu.institution} {edu.modality ? `• ${edu.modality}` : ''}
+                                    </p>
+                                </div>
+                                <span className="cv-edu-status">
+                                    {edu.status === 'in-progress' ? t.inProgress : edu.endDate}
+                                </span>
                             </div>
                         ))}
                     </div>
@@ -149,7 +167,7 @@ function CVContent() {
                                     <h3>{projeto.name}</h3>
                                     {projeto.liveUrl && (
                                         <a href={projeto.liveUrl} target="_blank" rel="noopener noreferrer">
-                                            {projeto.liveUrl.replace('https://', '')}
+                                            {projeto.liveUrl.replace('https://', '').replace('www.', '')}
                                         </a>
                                     )}
                                 </div>
@@ -177,7 +195,7 @@ function CVContent() {
 
 export default function CVPage() {
     return (
-        <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+        <Suspense fallback={<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>Loading...</div>}>
             <CVContent />
         </Suspense>
     );
