@@ -233,20 +233,6 @@ export const projects: Project[] = [
         stars: 0,
         featured: false,
         status: 'production'
-    },
-    {
-        id: "desafio-2025",
-        name: "Animal Adoption System",
-        description: {
-            en: "Technical challenge implementing matching algorithms to assist animal adoption processes.",
-            ptBR: "Desafio técnico com algoritmos de matching para auxiliar processos de adoção de animais."
-        },
-        technologies: ["JavaScript", "Algorithms", "Logic"],
-        githubUrl: "https://github.com/davidassef/desafio-davidassef-2025",
-        isPrivate: false,
-        stars: 0,
-        featured: false,
-        status: 'challenge'
     }
 ];
 
