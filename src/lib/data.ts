@@ -12,7 +12,7 @@ export interface Project {
     isPrivate: boolean;
     stars: number;
     featured: boolean;
-    status?: 'production' | 'staging' | 'development' | 'challenge' | 'discontinued';
+    status?: 'production' | 'beta' | 'staging' | 'development' | 'challenge' | 'discontinued';
     versions?: {
         name: string;
         description: { en: string; ptBR: string };
@@ -146,6 +146,20 @@ export const projects: Project[] = [
 
     // PRODUTOS EM PRODUÇÃO E PROJETOS PÚBLICOS
     {
+        id: "living",
+        name: "Living",
+        description: {
+            en: "Voice, chat and screen-sharing app with no accounts: anyone creates a group with just a name and shares an invite. Voice rooms, live streams watched on demand, persistent chat via SSE, presence, auto-reconnect and moderation, plus a desktop app for Windows and Linux with signed auto-updates. Self-hosted WebRTC media (Galene/LiveKit with TURN) behind Traefik, with short-lived ES256 media tokens. In beta: it has no domain of its own yet and temporarily runs under the LotoScore domain.",
+            ptBR: "Aplicativo de voz, chat e compartilhamento de tela sem contas: qualquer pessoa cria um grupo só com o nome e compartilha um convite. Salas de voz, lives assistidas sob demanda, chat persistente via SSE, presença, reconexão automática e moderação, além de aplicativo desktop para Windows e Linux com atualização automática assinada. Mídia WebRTC autohospedada (Galene/LiveKit com TURN) atrás do Traefik, com tokens de mídia ES256 de curta duração. Em fase beta: ainda não tem domínio próprio e roda temporariamente no domínio do LotoScore."
+        },
+        technologies: ["React", "Node.js", "WebRTC", "LiveKit", "Electron", "Docker"],
+        liveUrl: "https://live.lotoscore.com.br",
+        isPrivate: true,
+        stars: 0,
+        featured: true,
+        status: 'beta'
+    },
+    {
         id: "lotoscore",
         name: "LotoScore",
         description: {
@@ -184,7 +198,7 @@ export const projects: Project[] = [
         githubUrl: "https://github.com/davidassef/schedule_shutdown",
         isPrivate: false,
         stars: 1,
-        featured: true,
+        featured: false,
         status: 'production',
         versions: [
             {

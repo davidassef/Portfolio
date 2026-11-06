@@ -1,15 +1,12 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Github, ExternalLink, Lock, Star, Code, Rocket } from 'lucide-react';
-import { projects, type Project } from '@/lib/data';
+import { projects, personalInfo, type Project } from '@/lib/data';
 
 interface ProjectsProps {
     locale: string;
 }
-
-type FilterType = 'all' | 'public' | 'private';
 
 function ProjectCard({ project, locale, index }: { project: Project; locale: string; index: number }) {
     const description = locale === 'en' ? project.description.en : project.description.ptBR;
@@ -18,6 +15,7 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
         if (!project.status) return null;
         const configs: Record<string, { className: string; icon: typeof Rocket; label: { en: string; pt: string } }> = {
             production: { className: 'badge-green', icon: Rocket, label: { en: 'Live', pt: 'Produção' } },
+            beta: { className: 'badge-yellow', icon: Rocket, label: { en: 'Beta', pt: 'Beta' } },
             staging: { className: 'badge-yellow', icon: Rocket, label: { en: 'Staging', pt: 'Homologação' } },
             development: { className: 'badge-yellow', icon: Code, label: { en: 'In Dev', pt: 'Em Dev' } },
             challenge: { className: 'badge-purple', icon: Star, label: { en: 'Challenge', pt: 'Desafio' } },
@@ -35,10 +33,8 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
 
     return (
         <motion.div
-            layout
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
             className="glass-card overflow-hidden group flex flex-col h-full relative"
         >
@@ -72,7 +68,7 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
                     </div>
                 </div>
 
-                <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-3">
+                <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
                     {description}
                 </p>
 
@@ -137,28 +133,8 @@ function ProjectCard({ project, locale, index }: { project: Project; locale: str
 }
 
 export default function Projects({ locale }: ProjectsProps) {
-    const [filter, setFilter] = useState<FilterType>('all');
-
-    const filteredProjects = projects.filter((project) => {
-        if (filter === 'all') return true;
-        if (filter === 'public') return !project.isPrivate;
-        if (filter === 'private') return project.isPrivate;
-        return true;
-    });
-
-    const sortedProjects = [...filteredProjects].sort((a, b) => {
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        if (!a.isPrivate && b.isPrivate) return -1;
-        if (a.isPrivate && !b.isPrivate) return 1;
-        return 0;
-    });
-
-    const filters: { value: FilterType; labelEn: string; labelPt: string }[] = [
-        { value: 'all', labelEn: 'All', labelPt: 'Todos' },
-        { value: 'public', labelEn: 'Public', labelPt: 'Públicos' },
-        { value: 'private', labelEn: 'Private', labelPt: 'Privados' },
-    ];
+    // Apenas os projetos em destaque; os demais ficam acessíveis pelo GitHub
+    const projetosDestaque = projects.filter((project) => project.featured);
 
     return (
         <section id="projects" className="section bg-[var(--bg-secondary)]">
@@ -171,51 +147,26 @@ export default function Projects({ locale }: ProjectsProps) {
                     className="text-center mb-16"
                 >
                     <h2 className="section-title text-gradient">
-                        {locale === 'en' ? 'Projects' : 'Projetos'}
+                        {locale === 'en' ? 'Featured Projects' : 'Projetos em Destaque'}
                     </h2>
                     <p className="section-subtitle">
                         {locale === 'en'
-                            ? 'A selection of my recent work'
-                            : 'Uma seleção dos meus trabalhos recentes'}
+                            ? 'AI products and platforms in production and beta'
+                            : 'Produtos de IA e plataformas em produção e em beta'}
                     </p>
                 </motion.div>
 
-                {/* Filters */}
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                    className="flex justify-center gap-2 mb-12"
-                >
-                    {filters.map((f) => (
-                        <button
-                            key={f.value}
-                            onClick={() => setFilter(f.value)}
-                            className={`px-5 py-2.5 rounded-lg text-sm font-mono font-medium transition-all ${filter === f.value
-                                ? 'bg-[var(--accent-cyan)] text-[var(--bg-primary)]'
-                                : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--accent-cyan)] hover:bg-[var(--bg-card)]'
-                                }`}
-                            style={filter === f.value ? { boxShadow: '0 0 15px rgba(14, 246, 204, 0.3)' } : {}}
-                        >
-                            {locale === 'en' ? f.labelEn : f.labelPt}
-                        </button>
-                    ))}
-                </motion.div>
-
                 <div className="flex flex-col gap-10">
-                    <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                        <AnimatePresence mode="popLayout">
-                            {sortedProjects.map((project, index) => (
-                                <ProjectCard
-                                    key={project.id}
-                                    project={project}
-                                    locale={locale}
-                                    index={index}
-                                />
-                            ))}
-                        </AnimatePresence>
-                    </motion.div>
+                    <div className="grid md:grid-cols-2 gap-5">
+                        {projetosDestaque.map((project, index) => (
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                locale={locale}
+                                index={index}
+                            />
+                        ))}
+                    </div>
 
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -225,13 +176,13 @@ export default function Projects({ locale }: ProjectsProps) {
                         className="text-center"
                     >
                         <a
-                            href="https://github.com/davidassef"
+                            href={personalInfo.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-secondary inline-flex"
                         >
                             <Github size={18} />
-                            <span>{locale === 'en' ? 'View all on GitHub' : 'Ver todos no GitHub'}</span>
+                            <span>{locale === 'en' ? 'See other projects on GitHub' : 'Ver outros projetos no GitHub'}</span>
                         </a>
                     </motion.div>
                 </div>
