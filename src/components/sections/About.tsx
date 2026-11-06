@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { personalInfo, stats } from '@/lib/data';
+import { personalInfo, stats, languages } from '@/lib/data';
 
 interface AboutProps {
     locale: string;
@@ -42,18 +42,28 @@ export default function About({ locale }: AboutProps) {
 
                         <p className="text-[var(--text-secondary)] leading-relaxed text-base">
                             {locale === 'en'
-                                ? `With ${stats.projects} projects delivered using ${stats.technologies}+ technologies and ${stats.yearsExp}+ years of hands-on experience, I build applications that go from architecture to production — APIs, databases, cloud infrastructure, and AI integrations.`
-                                : `Com ${stats.projects} projetos entregues usando ${stats.technologies}+ tecnologias e ${stats.yearsExp}+ anos de experiência prática, construo aplicações que vão da arquitetura à produção — APIs, bancos de dados, infraestrutura cloud e integrações de IA.`}
+                                ? `With ${stats.projects} projects delivered using ${stats.technologies}+ technologies and ${stats.yearsExp}+ years of hands-on experience, I take AI-powered products from idea to production: LLM integrations, agents and automations, APIs, databases and cloud infrastructure.`
+                                : `Com ${stats.projects} projetos entregues usando ${stats.technologies}+ tecnologias e ${stats.yearsExp}+ anos de experiência prática, levo produtos com IA da ideia à produção: integrações com LLMs, agentes e automações, APIs, bancos de dados e infraestrutura cloud.`}
                         </p>
 
                         {/* Tags */}
                         <div className="flex flex-wrap gap-2 pt-2">
-                            {['Clean Code', 'SOLID', 'REST APIs', 'AI/ML', 'Cloud'].map((tag) => (
+                            {['LLMs', 'Prompt Engineering', 'AI Agents', 'MCP', 'Automação com IA', 'REST APIs', 'Cloud'].map((tag) => (
                                 <span key={tag} className="badge text-xs">
                                     {tag}
                                 </span>
                             ))}
                         </div>
+
+                        {/* Idiomas */}
+                        <p className="font-mono text-sm text-[var(--text-secondary)]">
+                            {locale === 'en' ? 'Languages: ' : 'Idiomas: '}
+                            {languages
+                                .map((idioma) => locale === 'en'
+                                    ? `${idioma.name.en} (${idioma.level.en})`
+                                    : `${idioma.name.ptBR} (${idioma.level.ptBR})`)
+                                .join(' • ')}
+                        </p>
 
                         {/* Status bar */}
                         <motion.div
@@ -67,8 +77,8 @@ export default function About({ locale }: AboutProps) {
                                 <span className="w-2 h-2 rounded-full bg-[var(--accent-green)] animate-pulse" />
                                 <span className="font-mono text-sm text-[var(--text-secondary)]">
                                     {locale === 'en'
-                                        ? 'Available for projects'
-                                        : 'Disponível para projetos'}
+                                        ? 'Open to AI internship and residency programs'
+                                        : 'Disponível para estágio e residência em IA'}
                                 </span>
                             </div>
                         </motion.div>

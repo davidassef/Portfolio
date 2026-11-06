@@ -34,7 +34,7 @@ export default function Contact({ locale }: ContactProps) {
         {
             icon: Linkedin,
             label: 'LinkedIn',
-            value: '/in/davidassef',
+            value: '/in/david-assef-carneiro',
             href: personalInfo.linkedin,
             color: 'var(--accent-blue)',
         },

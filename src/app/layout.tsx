@@ -15,23 +15,23 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "David Assef | Full-Stack Developer & AI Engineer",
-  description: "AI-driven developer building smart tools with ML, voice cloning & music generation. Clean code, automated tests, and comprehensive documentation.",
-  keywords: ["David Assef", "Full-Stack Developer", "AI Engineer", "React", "Next.js", "TypeScript", "Python", "Go", "Machine Learning"],
+  title: "David Assef | AI Engineer & Full-Stack Developer",
+  description: "AI Engineer building AI products end to end: LLM agents in production, MCP tooling, automations and full-stack platforms.",
+  keywords: ["David Assef", "AI Engineer", "AI Builder", "LLM", "AI Agents", "MCP", "Full-Stack Developer", "React", "Next.js", "TypeScript", "Python", "Go", "Machine Learning"],
   authors: [{ name: "David Assef Carneiro" }],
   creator: "David Assef Carneiro",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://davidassef.me",
-    title: "David Assef | Full-Stack Developer & AI Engineer",
-    description: "AI-driven developer building smart tools with ML, voice cloning & music generation.",
+    title: "David Assef | AI Engineer & Full-Stack Developer",
+    description: "AI Engineer building AI products end to end: LLM agents, automations and full-stack platforms.",
     siteName: "David Assef Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "David Assef | Full-Stack Developer & AI Engineer",
-    description: "AI-driven developer building smart tools with ML, voice cloning & music generation.",
+    title: "David Assef | AI Engineer & Full-Stack Developer",
+    description: "AI Engineer building AI products end to end: LLM agents, automations and full-stack platforms.",
   },
   robots: {
     index: true,

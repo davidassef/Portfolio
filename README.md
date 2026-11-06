@@ -2,7 +2,7 @@
 
 🚀 **[davidassef.me](https://davidassef.me)**
 
-Portfolio pessoal com tema sci-fi dark mode, construído com Next.js 15, Tailwind CSS e Framer Motion.
+Portfolio pessoal com tema sci-fi dark mode, construído com Next.js 16, Tailwind CSS e Framer Motion.
 
 ## ✨ Features
 
@@ -14,9 +14,9 @@ Portfolio pessoal com tema sci-fi dark mode, construído com Next.js 15, Tailwin
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, Next.js 15, TypeScript
+- **Frontend:** React, Next.js 16, TypeScript
 - **Styling:** Tailwind CSS, Framer Motion
-- **Deploy:** Vercel
+- **Deploy:** GitHub Pages (export estático via GitHub Actions)
 
 ## 🚀 Development
 

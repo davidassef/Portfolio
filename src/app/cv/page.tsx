@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { personalInfo, skills, experiences, projects, education } from '@/lib/data';
+import { personalInfo, skills, experiences, projects, education, languages } from '@/lib/data';
 import { Download, Mail, Github, Linkedin, MapPin, Phone } from 'lucide-react';
 
 function CVContent() {
@@ -37,6 +37,8 @@ function CVContent() {
         projects: locale === 'en' ? 'Featured Projects' : 'Projetos em Destaque',
         present: locale === 'en' ? 'Present' : 'Atual',
         inProgress: locale === 'en' ? 'In Progress' : 'Em Andamento',
+        expected: locale === 'en' ? 'Expected' : 'Conclusão prevista',
+        languages: locale === 'en' ? 'Languages' : 'Idiomas',
         portfolioAt: locale === 'en' ? 'Full portfolio at' : 'Portfólio completo em'
     };
 
@@ -71,7 +73,7 @@ function CVContent() {
                         </a>
                         <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
                             <Linkedin size={14} />
-                            linkedin.com/in/davidassef
+                            linkedin.com/in/david-assef-carneiro
                         </a>
                         <span>
                             <MapPin size={14} />
@@ -133,7 +135,24 @@ function CVContent() {
                                     </p>
                                 </div>
                                 <span className="cv-edu-status">
-                                    {edu.status === 'in-progress' ? t.inProgress : edu.endDate}
+                                    {edu.status === 'in-progress'
+                                        ? (edu.endDate ? `${t.expected}: ${edu.endDate}` : t.inProgress)
+                                        : edu.endDate}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Idiomas */}
+                <section className="cv-section">
+                    <h2>{t.languages}</h2>
+                    <div className="cv-education">
+                        {languages.map((idioma) => (
+                            <div key={idioma.name.en} className="cv-edu-item">
+                                <h3>{locale === 'en' ? idioma.name.en : idioma.name.ptBR}</h3>
+                                <span className="cv-edu-status">
+                                    {locale === 'en' ? idioma.level.en : idioma.level.ptBR}
                                 </span>
                             </div>
                         ))}

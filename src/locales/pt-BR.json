@@ -11,8 +11,8 @@
     "hero": {
         "greeting": "Olá, sou",
         "name": "David Assef",
-        "role": "Desenvolvedor Full-Stack & Engenheiro de IA",
-        "description": "Construindo soluções inteligentes com tecnologia de ponta. Código limpo, testes automatizados e desenvolvimento orientado por IA.",
+        "role": "Engenheiro de IA & Desenvolvedor Full-Stack",
+        "description": "Construo produtos com IA de ponta a ponta: LLMs, agentes, automações e deploy em produção.",
         "cta": {
             "projects": "Ver Projetos",
             "contact": "Entre em Contato"
@@ -21,7 +21,7 @@
     "about": {
         "title": "Sobre Mim",
         "subtitle": "Transformando problemas complexos em soluções elegantes",
-        "description": "Sou um desenvolvedor de software apaixonado, focado em criar ferramentas inteligentes usando Machine Learning, clonagem de voz e geração de música. Acredito em princípios de código limpo, cobertura abrangente de testes e documentação detalhada. Enquanto a IA auxilia meu fluxo de trabalho, eu estou sempre no comando das decisões.",
+        "description": "Sou engenheiro de software focado em transformar IA em produtos reais: integro LLMs, escrevo prompts avançados, construo ferramentas para agentes de código e publico tudo em produção. A IA acelera meu trabalho, mas as decisões técnicas são sempre minhas.",
         "stats": {
             "projects": "Projetos",
             "technologies": "Tecnologias",
